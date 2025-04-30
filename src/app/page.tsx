@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { Menu, X, ExternalLink, Mail, MessageSquare, Code, User, Moon, Sun } from 'lucide-react';
+import { Menu, X, ExternalLink, Mail, Code, User, Moon, Sun } from 'lucide-react';
+import TextScramble from '@/components/ui/TextScramble';
 
 
 export default function Portfolio() {
@@ -99,9 +100,9 @@ export default function Portfolio() {
       <section className="py-24 bg-gradient-to-br from-white via-zinc-400 to-white dark:bg-gradient-to-br dark:from-black dark:via-zinc-800 dark:to-black text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-black to-white dark:bg-gradient-to-r dark:from-white dark:to-black bg-clip-text text-transparent">
-              ERIC ZHOU
-            </h1>
+            <TextScramble className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-black to-white dark:bg-gradient-to-r dark:from-white dark:to-black bg-clip-text text-transparent" data-value="ERIC ZHOU"
+              text="ERIC ZHOU"
+            />
             <p className="text-xl md:text-2xl mb-10 max-w-3xl mx-auto text-slate-900 dark:text-slate-200">
               Comp Sci STUDENT!!!!HSHASODI
             </p>
@@ -137,14 +138,14 @@ export default function Portfolio() {
             </div>
             <div className="md:w-2/3 mt-8 md:mt-0">
               <p className="text-lg mb-4 text-slate-700 dark:text-slate-300">
-                Hi! I'm a passionate computer science student with a very expansive and unique skillset! I'm incoming at <a href="https://www.stonybrook.edu/simons/" target="https://www.stonybrook.edu/simons/"> <span className='text-underline'>Simons Summer Research Program</span></a> in blockchain and distributed systems with Prof. Mohammad Javad Amiri and have done research with Prof. Shiyong Lu at Wayne State University. I've also worked with neural networks and ML using Python and web dev and React.js with this portfolio site!
+                Hi! I&apos;m a passionate computer science student with a very expansive and unique skillset! I&apos;m incoming at <a href="https://www.stonybrook.edu/simons/" target="https://www.stonybrook.edu/simons/"> <span className='text-underline'>Simons Summer Research Program</span></a> in blockchain and distributed systems with Prof. Mohammad Javad Amiri and have done research with Prof. Shiyong Lu at Wayne State University. I&apos;ve also worked with neural networks and ML using Python and web dev and React.js with this portfolio site!
               </p>
               
               {/* Custom alert */}
               <div className="mt-8 bg-gradient-to-r from-blue-600/10 to-indigo-600/10 dark:from-blue-600/20 dark:to-indigo-600/20 border-l-4 border-blue-600 rounded-lg p-4 shadow-lg">
                 <h4 className="text-blue-700 dark:text-blue-400 font-semibold mb-1">Currently Available for Work</h4>
                 <p className="text-slate-700 dark:text-slate-300">
-                  I'm open to discussing new projects and opportunities. Feel free to reach out!
+                  I&apos;m open to discussing new projects and opportunities. Feel free to reach out!
                 </p>
               </div>
             </div>
@@ -284,7 +285,7 @@ export default function Portfolio() {
                 </div>
                 <div className="mt-8 p-4 bg-gradient-to-r from-blue-600/10 to-indigo-600/10 dark:from-blue-600/20 dark:to-indigo-600/20 rounded-lg">
                   <h4 className="font-medium mb-2 text-slate-800 dark:text-white">Availability</h4>
-                  <p className="text-slate-600 dark:text-slate-300">I'm currently available for freelance work, part-time opportunities, and remote internships. I will respond as soon as I can (<span>&#60;</span>24 hrs)</p>
+                  <p className="text-slate-600 dark:text-slate-300">I&apos;m currently available for freelance work, part-time opportunities, and remote internships. I will respond as soon as I can (<span>&#60;</span>24 hrs)</p>
                 </div>
               </div>
             </div>
