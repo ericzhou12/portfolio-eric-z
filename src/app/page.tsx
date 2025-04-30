@@ -190,7 +190,7 @@ export default function Portfolio() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-blue-500/20">
+            <button className="bg-gradient-to-r from-zinc-600 to-slate-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-blue-500/20">
               View All Projects
             </button>
           </div>
@@ -253,7 +253,7 @@ export default function Portfolio() {
                 </div>
                 <button 
                   type="submit" 
-                  className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-3 rounded-lg font-medium hover:from-blue-700 hover:to-indigo-700 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-blue-500/20"
+                  className="bg-gradient-to-r from-zinc-600 to-slate-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-blue-500/20"
                 >
                   Send Message
                 </button>
