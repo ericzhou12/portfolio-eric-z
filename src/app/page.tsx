@@ -1,12 +1,5 @@
 "use client";
 import { useState, useEffect } from 'react';
-import { Menu, X, ExternalLink, Mail, Code, User, Moon, Sun } from 'lucide-react';
-import TextScramble from '@/components/ui/TextScramble';
-import { motion } from "framer-motion";
-import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
-import { Nav } from "@/components/nav";
-import { CustomCursor } from "@/components/custom-cursor";
-import { RippleEffect } from "@/components/ripple-effect";
 import { About } from "@/components/about";
 import { Projects } from "@/components/projects";
 import { Contact } from "@/components/contact";
@@ -14,10 +7,11 @@ import { Skills } from "@/components/skills";
 import { BackgroundShapes } from "@/components/background-shapes";
 import { Hero } from "@/components/hero";
 import { ScrollNav } from "@/components/scroll-nav";
+import { CustomCursor } from "@/components/custom-cursor";
+import { RippleEffect } from "@/components/ripple-effect";
 
 export default function Home() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(true); // Default to dark mode
+  const [darkMode] = useState(true); // Default to dark mode
 
   useEffect(() => {
     // Apply dark mode class to document body on mount and when changed
@@ -41,10 +35,6 @@ export default function Home() {
       tags: ["Python", "PyTorch", "MatPlotLib", "pandas", "Jupyter Notebook"],
       github: "https://github.com/ericzhou12/GreatLakesWaterQualityANN"
     }
-  ];
-
-  const skills = [
-    "Solidity", "Python", "C++", "Foundry", "React.js", "PyTorch", "MatPlotLib", "Next.js", "HTML/CSS", "Java"
   ];
 
   return (

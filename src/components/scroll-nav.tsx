@@ -12,7 +12,6 @@ const sections = [
 ];
 
 export function ScrollNav() {
-  const [activeSection, setActiveSection] = useState("hero");
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -26,7 +25,6 @@ export function ScrollNav() {
         if (element) {
           const rect = element.getBoundingClientRect();
           if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-            setActiveSection(section.id);
             break;
           }
         }
