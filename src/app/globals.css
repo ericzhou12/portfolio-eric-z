@@ -122,10 +122,28 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    cursor: none !important;
   }
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-space-mono);
   }
   
+}
+
+/* Custom animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
