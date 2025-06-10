@@ -2,10 +2,30 @@
 
 import { motion } from "framer-motion";
 import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import { useTheme } from "next-themes";
+import { Sun, Moon } from "lucide-react";
+import { useState, useEffect } from "react";
 
 export function Hero() {
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Theme toggle button */}
+      {mounted && (
+        <button
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          className="fixed top-6 right-8 z-50 p-2 rounded-full bg-background/80 hover:bg-accent transition-colors shadow"
+          aria-label="Toggle theme"
+        >
+          {theme === "dark" ? <Sun size={22} /> : <Moon size={22} />}
+        </button>
+      )}
       {/* Main content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
         <motion.div
