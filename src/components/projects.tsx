@@ -1,12 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FiGithub } from "react-icons/fi";
+import { FiGithub, FiExternalLink } from "react-icons/fi";
 
 interface Project {
   title: string;
   description: string;
   tags: string[];
+  link? : string;
   github?: string;
 }
 
@@ -57,6 +58,18 @@ export function Projects({ projects }: ProjectsProps) {
                     whileTap={{ scale: 0.95 }}
                   >
                     <FiGithub size={20} />
+                  </motion.a>
+                )}
+                {project.link && (
+                  <motion.a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <FiExternalLink size={20} />
                   </motion.a>
                 )}
               </div>
