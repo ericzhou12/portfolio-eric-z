@@ -81,7 +81,7 @@ export function Contact() {
                 <div className="flex items-center gap-4">
                   <FiLinkedin className="text-primary" size={20} />
                   <a
-                    href="https://linkedin.com/in/ericzhou12"
+                    href="https://linkedin.com/in/erichyzhou"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-muted-foreground hover:text-primary transition-colors"
