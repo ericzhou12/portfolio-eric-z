@@ -1,95 +1,81 @@
-"use client";
+import { ArrowUpRight } from "lucide-react";
+import { Reveal } from "@/components/reveal";
+import { Section } from "@/components/section";
+import { projects } from "@/lib/content";
 
-import { motion } from "framer-motion";
-import { FiGithub, FiExternalLink } from "react-icons/fi";
-
-interface Project {
-  title: string;
-  description: string;
-  tags: string[];
-  link? : string;
-  github?: string;
-}
-
-interface ProjectsProps {
-  projects: Project[];
-}
-
-export function Projects({ projects }: ProjectsProps) {
+export function Projects() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center py-20">
-      <div className="max-w-4xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-lg md:text-xl text-muted-foreground font-light tracking-wider mb-4">
-            FEATURED PROJECTS
-          </h2>
-          <h3 className="text-4xl md:text-5xl font-playfair font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary/60">
-            My Work
-          </h3>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="bg-card/50 backdrop-blur-sm rounded-lg p-6 border border-border/50"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <h4 className="text-xl font-playfair font-semibold">
+    <Section
+      id="projects"
+      index="02"
+      title="Projects"
+      intro="Things I built end to end — shipped, measured, and in front of real users or judges."
+    >
+      <div className="grid gap-4 md:grid-cols-2">
+        {projects.map((project, index) => (
+          <Reveal
+            key={project.title}
+            delay={index * 60}
+            className={index === 0 ? "md:col-span-2" : undefined}
+          >
+            <article className="flex h-full flex-col rounded-xl border border-line bg-surface p-6 transition-colors hover:border-accent/30 sm:p-8">
+              <div className="flex items-baseline justify-between gap-4">
+                <h3 className="text-lg font-semibold tracking-tight">
                   {project.title}
-                </h4>
-                {project.github && (
-                  <motion.a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <FiGithub size={20} />
-                  </motion.a>
-                )}
-                {project.link && (
-                  <motion.a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <FiExternalLink size={20} />
-                  </motion.a>
-                )}
+                </h3>
+                <span className="shrink-0 font-mono text-xs text-faint">
+                  {project.year}
+                </span>
               </div>
-              <p className="text-muted-foreground mb-6">
+
+              <p className="mt-1.5 font-mono text-xs text-accent">
+                {project.tagline}
+              </p>
+
+              <p className="mt-4 text-sm leading-relaxed text-muted">
                 {project.description}
               </p>
-              <div className="flex flex-wrap gap-2">
+
+              <ul className="mt-5 space-y-2.5">
+                {project.highlights.map((highlight) => (
+                  <li
+                    key={highlight}
+                    className="relative pl-5 text-sm leading-relaxed text-muted before:absolute before:left-0 before:top-[0.6em] before:size-1 before:rounded-full before:bg-accent/50"
+                  >
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-6 flex flex-wrap gap-1.5">
                 {project.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 bg-primary/10 rounded-full text-primary text-sm"
+                    className="rounded-md border border-line px-2 py-1 font-mono text-[0.6875rem] text-muted"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
-            </motion.div>
-          ))}
-        </div>
+
+              <div className="mt-6 flex flex-wrap gap-4 border-t border-line pt-5">
+                {project.links.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 font-mono text-xs text-accent underline-offset-4 hover:underline"
+                  >
+                    {link.label}
+                    <ArrowUpRight className="size-3" aria-hidden />
+                  </a>
+                ))}
+              </div>
+            </article>
+          </Reveal>
+        ))}
       </div>
-    </section>
+    </Section>
   );
-} 
+}

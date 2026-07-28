@@ -1,0 +1,316 @@
+// Single source of truth for site content. Edit here, not in components.
+
+export const profile = {
+  name: "Eric Zhou",
+  headline: "CS + Math @ Northwestern",
+  blurb:
+    "",
+  location: "Troy, MI · Evanston, IL",
+  email: "erichyzhou@u.northwestern.edu",
+  phone: "248-250-0040",
+  site: "https://erichyzhou.vercel.app",
+  github: "https://github.com/ericzhou12",
+  linkedin: "https://www.linkedin.com/in/erichyzhou/",
+  resume: "/eric-zhou-resume.pdf",
+  status: "SDE Intern @ Tyler Technologies",
+};
+
+export const facts: { label: string; value: string }[] = [
+  { label: "University", value: "Northwestern University" },
+  { label: "Focus", value: "Machine Learning; Distributed Systems" },
+  { label: "Based", value: "Troy, MI / Evanston, IL" },
+];
+
+export type Job = {
+  role: string;
+  org: string;
+  orgUrl?: string;
+  period: string;
+  location: string;
+  kind: string;
+  summary: string;
+  points: string[];
+  metrics?: { value: string; label: string }[];
+  stack: string[];
+  links?: { label: string; href: string }[];
+};
+
+export const experience: Job[] = [
+  {
+    role: "Software Development Engineer Intern",
+    org: "Tyler Technologies",
+    orgUrl: "https://www.tylertech.com",
+    period: "May 2026 — Present",
+    location: "Troy, MI · On-site",
+    kind: "Internship",
+    summary:
+      "Built an end-to-end internal police report writing platform on AWS, from the SPA at the edge down to the authorization firewall and the infrastructure that provisions it.",
+    points: [
+      "Built the comprehensive, end-to-end internal police report writing support platform — an SPA served from S3 behind CloudFront, calling REST APIs backed by stateless, serverless Lambda endpoints.",
+      "Formed a secure entry gateway with Cognito OIDC, parsing and validating user JWT claims server-side to act as a strict authorization firewall enforcing granular RBAC across multi-tenant report infrastructures.",
+      "Consolidated API endpoints into feature Lambdas to maximize warm starts, cutting latency during bursts of 1000+ tenant reports from the main client; deployed a flat DynamoDB key-value store to match Lambda's stateless model.",
+      "Authored modular AWS CDK (TypeScript) infrastructure stacks automating environment provisioning across Commercial and GovCloud partitions, isolating CJIS-regulated data while keeping frontend and backend at parity.",
+      "Automated CI/CD with GitHub Actions — CDK audits, unit tests, and security linting on every pull request, including multi-tenant RBAC business logic confirmation in tests.",
+    ],
+    metrics: [
+      { value: "1000+", label: "tenant reports per burst" },
+      { value: "2", label: "AWS partitions (Commercial + GovCloud)" },
+      { value: "CJIS", label: "regulated data isolation" },
+    ],
+    stack: [
+      "TypeScript",
+      "Angular",
+      "AWS CDK",
+      "Lambda",
+      "DynamoDB",
+      "Cognito / OIDC",
+      "S3",
+      "CloudFront",
+      "GitHub Actions",
+    ],
+  },
+  {
+    role: "Simons Research Fellow in Computer Science",
+    org: "Stony Brook University",
+    orgUrl: "https://www.stonybrook.edu",
+    period: "Jun 2025 — Jun 2026",
+    location: "Stony Brook, NY",
+    kind: "Research · PI: Dr. Mohammad Javad Amiri",
+    summary:
+      "Applied reinforcement learning to parameter-space optimization of DAG-based Byzantine fault-tolerant consensus, cutting end-to-end latency of the Autobahn protocol by half.",
+    points: [
+      "Selected as 1 of 53 fellows from 1,380 applicants (~3.8%) to the Simons Summer Research Program.",
+      "Leveraged reinforcement learning for parameter-space optimization and communication in DAG-based Byzantine fault-tolerant consensus protocols, reducing end-to-end latency of the Autobahn protocol by 49.8% vs. default and 73.3% vs. random parameter configuration across 6 scenarios with varied adversarial and normal behavior.",
+      "Designed an RL algorithm using CMAB and Thompson sampling that operates within safety and liveness constraints; tested on Google Cloud Platform with VMs as nodes across geographic regions.",
+      "Collaborated with professors at Stony Brook, the University of Pennsylvania, and City University of Hong Kong; submitted to VLDB 2026. Presented a poster and awarded a $500 stipend.",
+    ],
+    metrics: [
+      { value: "49.8%", label: "latency reduction vs. default" },
+      { value: "73.3%", label: "vs. random configuration" },
+      { value: "3.8%", label: "fellowship acceptance rate" },
+    ],
+    stack: [
+      "Python",
+      "Rust",
+      "Reinforcement Learning",
+      "CMAB",
+      "Thompson Sampling",
+      "GCP",
+      "Distributed Systems",
+    ],
+    links: [
+      { label: "arXiv:2606.09120", href: "https://arxiv.org/abs/2606.09120" },
+    ],
+  },
+  {
+    role: "Finance Academy Participant",
+    org: "Morgan Stanley",
+    orgUrl: "https://www.morganstanley.com",
+    period: "Oct 2025 — Mar 2026",
+    location: "Remote",
+    kind: "Program",
+    summary:
+      "One of 150 participants nationwide, instructed by Institutional Securities Group analysts.",
+    points: [
+      "Selected as 1 of 150 participants nationwide and instructed by Institutional Securities Group analysts.",
+      "Applied analytical and problem-solving skills through assignments, case studies, and team-based finance projects.",
+    ],
+    metrics: [{ value: "150", label: "participants nationwide" }],
+    stack: ["Valuation", "Case Studies", "Financial Modeling"],
+  },
+  {
+    role: "Blockchain Research Assistant",
+    org: "Wayne State University",
+    orgUrl: "https://wayne.edu",
+    period: "May 2024 — Oct 2025",
+    location: "Troy, MI · Hybrid",
+    kind: "Research · PI: Dr. Shiyong Lu",
+    summary:
+      "Smart contract auditing on the Sepolia testnet, plus ideation and writing for an AI health agent.",
+    points: [
+      "Programmed and tested smart contracts in Solidity deployed to the Sepolia testnet; audited over 10,000 lines of code.",
+      "Managed communication between graduate-level courses CSC 8710 and CSC 4996 under Professor Shiyong Lu.",
+      "Assisted in writing and ideating Longevity AI, an AI agent centered on health.",
+    ],
+    metrics: [{ value: "10,000+", label: "lines of contract code audited" }],
+    stack: ["Solidity", "Ethereum", "Sepolia Testnet", "AI Agents"],
+  },
+  {
+    role: "Software Engineer & QA Intern",
+    org: "BoardX",
+    period: "Apr 2022 — Aug 2022",
+    location: "Troy, MI · Remote",
+    kind: "Internship",
+    summary:
+      "First engineering internship — feature work and quality assurance on a collaborative whiteboard product.",
+    points: [
+      "Contributed to feature development and quality assurance for a collaborative online whiteboard platform.",
+      "Wrote and executed test plans, reporting and triaging defects alongside the engineering team.",
+    ],
+    stack: ["JavaScript", "QA", "Manual Testing"],
+  },
+];
+
+export type Project = {
+  title: string;
+  tagline: string;
+  year: string;
+  description: string;
+  highlights: string[];
+  tags: string[];
+  links: { label: string; href: string }[];
+};
+
+export const projects: Project[] = [
+  {
+    title: "The New Page Project",
+    tagline: "Nonprofit platform for global book donation logistics",
+    year: "2025",
+    description:
+      "Solo-built and deployed the React site for a literacy nonprofit, handling outreach, SEO, and donation logistics.",
+    highlights: [
+      "Powers logistics for 20,000+ book donations reaching 680+ students worldwide",
+      "Solo-built, deployed, and maintained; iterated on real user feedback",
+    ],
+    tags: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "SEO"],
+    links: [{ label: "thenewpageproject.com", href: "https://www.thenewpageproject.com" }],
+  },
+  {
+    title: "AquaNet",
+    tagline: "Neural network for lake water quality assessment",
+    year: "2025",
+    description:
+      "An artificial neural network predicting water quality indicators in lakes from EPA environmental data.",
+    highlights: [
+      "Average RMSE of 0.3396 over 100 epochs across 3 factors on 100 trials",
+      "Preprocessing pipeline cleaning and normalizing 110,000+ environmental data points",
+      "NOAA Taking the Pulse of the Planet Award; presented at SEFMD and MSEF",
+    ],
+    tags: ["Python", "PyTorch", "pandas", "NumPy", "Matplotlib"],
+    links: [
+      {
+        label: "GitHub",
+        href: "https://github.com/ericzhou12/GreatLakesWaterQualityANN",
+      },
+    ],
+  },
+  {
+    title: "Modified Black-Litterman Model",
+    tagline: "Sector-level allocation with SLSQP Sharpe optimization",
+    year: "2025",
+    description:
+      "A modified Black-Litterman stock allocation model distributing capital by sector, optimizing the Sharpe ratio via SLSQP.",
+    highlights: [
+      "Wharton Global High School Investment Competition semifinalist — top 50 of 5,000+ teams",
+      "Sector-level allocation with sequential least-squares constrained optimization",
+    ],
+    tags: ["Python", "SciPy", "pandas", "Matplotlib", "Jupyter"],
+    links: [{ label: "GitHub", href: "https://github.com/ericzhou12/WGHSIC" }],
+  },
+];
+
+export const honors: { title: string; detail: string; year: string }[] = [
+  {
+    title: "Regeneron Science Talent Search Scholar",
+    detail: "Top 300 nationally · Regeneron",
+    year: "2026",
+  },
+  {
+    title: "National Merit Scholar",
+    detail: "1580 SAT, 800 Math",
+    year: "2026",
+  },
+  {
+    title: "American Junior Academies of Science Fellow",
+    detail: "Gordon & Betty Moore Scholarship recipient",
+    year: "2025",
+  },
+  {
+    title: "Wharton Global Investment Competition Semifinalist",
+    detail: "Top 50 of 5,000+ teams · University of Pennsylvania",
+    year: "2025",
+  },
+  {
+    title: "NOAA Taking the Pulse of the Planet Award",
+    detail: "2nd place, Science and Engineering Fair of Metro Detroit",
+    year: "2025",
+  },
+  {
+    title: "Michigan D1 All-State Swimming — Team Captain",
+    detail: "Four consecutive years",
+    year: "2023—26",
+  },
+];
+
+export const skills: { group: string; items: string[] }[] = [
+  {
+    group: "Languages",
+    items: ["C++", "Python", "TypeScript", "Rust", "Solidity", "SQL"],
+  },
+  {
+    group: "Frontend",
+    items: ["React", "Next.js", "Angular", "Tailwind CSS"],
+  },
+  {
+    group: "Cloud & Infra",
+    items: [
+      "AWS",
+      "AWS CDK",
+      "CloudFormation",
+      "Lambda",
+      "DynamoDB",
+      "S3",
+      "CloudFront",
+      "Cognito / OIDC",
+      "IAM",
+      "GCP",
+    ],
+  },
+  {
+    group: "AI / ML",
+    items: ["PyTorch", "pandas", "NumPy", "Matplotlib", "Reinforcement Learning"],
+  },
+  {
+    group: "Tools & Practice",
+    items: ["Git", "GitHub Actions", "Docker", "Linux (WSL)", "CI/CD", "Agile"],
+  },
+];
+
+export const education = [
+  {
+    school: "Northwestern University",
+    detail: "B.S. Computer Science & Mathematics",
+    period: "Expected 2029",
+    location: "Evanston, IL",
+  },
+  {
+    school: "Lawrence Technological University",
+    detail:
+      "Dual enrollment · 4.0 GPA — Multivariable Calculus, Linear Algebra, Functional Programming, Computer Science 2",
+    period: "2026",
+    location: "Southfield, MI",
+  },
+  {
+    school: "Troy High School",
+    detail: "All-State Swim Team Captain · Computer Club President",
+    period: "2022 — 2026",
+    location: "Troy, MI",
+  },
+];
+
+export const certifications = [
+  { title: "Options 101", org: "Akuna Capital", year: "2026" },
+  {
+    title: "Global High School Investment Competition",
+    org: "Wharton Global Youth Program",
+    year: "2025",
+  },
+];
+
+export const sections = [
+  { id: "work", label: "Work" },
+  { id: "projects", label: "Projects" },
+  { id: "honors", label: "Honors" },
+  { id: "skills", label: "Skills" },
+  { id: "contact", label: "Contact" },
+];
