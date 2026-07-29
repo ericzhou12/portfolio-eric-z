@@ -8,7 +8,7 @@ import { SocialRail } from "@/components/social-rail";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { profile } from "@/lib/content";
-import { shell } from "@/lib/utils";
+import { cn, shell } from "@/lib/utils";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -109,15 +109,18 @@ export default function RootLayout({
             Skip to content
           </a>
 
-          <SiteHeader />
-          <CommandPalette />
-          <ThemeToggle />
-          <SocialRail />
+          {/* Column layout lets a page claim exactly one viewport height. */}
+          <div className="flex min-h-dvh flex-col">
+            <SiteHeader />
+            <CommandPalette />
+            <ThemeToggle />
+            <SocialRail />
 
-          <main id="content" className={shell}>
-            {children}
-            <SiteFooter />
-          </main>
+            <main id="content" className={cn(shell, "flex flex-1 flex-col")}>
+              {children}
+              <SiteFooter />
+            </main>
+          </div>
         </ThemeProvider>
         <script
           type="application/ld+json"
