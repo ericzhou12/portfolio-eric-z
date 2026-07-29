@@ -8,7 +8,7 @@ export function Section({
   children,
 }: {
   id: string;
-  index: string;
+  index?: string;
   title: string;
   intro?: string;
   children: React.ReactNode;
@@ -17,12 +17,13 @@ export function Section({
     <section
       id={id}
       aria-labelledby={`${id}-title`}
-      className="border-t border-line py-20 sm:py-28"
+      // The leading section on a page carries no divider — only stacked ones do.
+      className="border-t border-line py-20 first:border-t-0 first:pt-12 sm:py-28 sm:first:pt-16"
     >
       <Reveal>
         <header className="mb-12 flex flex-col gap-3 sm:mb-16">
           <span className="label-caps">
-            {index} / {title}
+            {index ? `${index} / ${title}` : title}
           </span>
           <h2
             id={`${id}-title`}

@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { CommandPalette } from "@/components/command-palette";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { SocialRail } from "@/components/social-rail";
 import { ThemeProvider } from "@/components/theme-provider";
 import { profile } from "@/lib/content";
+import { shell } from "@/lib/utils";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,14 +24,17 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(profile.site),
   title: {
-    default: `${profile.name} — Software Engineer`,
+    default: `${profile.name}`,
     template: `%s · ${profile.name}`,
   },
   description:
-    "Eric Zhou — CS & Math at Northwestern. SDE intern at Tyler Technologies, Simons Research Fellow working on reinforcement learning for DAG-based BFT consensus.",
+    "Eric Zhou Website",
   keywords: [
     "Eric Zhou",
     "software engineer",
+    "machine learning",
+    "AI",
+    "human AI interaction",
     "Northwestern University",
     "distributed systems",
     "AWS",
@@ -93,7 +101,21 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <a
+            href="#content"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[110] focus:rounded-lg focus:bg-fg focus:px-4 focus:py-2 focus:text-sm focus:text-bg"
+          >
+            Skip to content
+          </a>
+
+          <SiteHeader />
+          <CommandPalette />
+          <SocialRail />
+
+          <main id="content" className={shell}>
+            {children}
+            <SiteFooter />
+          </main>
         </ThemeProvider>
         <script
           type="application/ld+json"

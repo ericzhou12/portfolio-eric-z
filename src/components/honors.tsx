@@ -6,7 +6,7 @@ export function Honors() {
   return (
     <Section
       id="honors"
-      index="03"
+      index="01"
       title="Honors"
       intro="Selected recognition, plus where I've studied."
     >

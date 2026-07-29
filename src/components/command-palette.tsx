@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import {
   ArrowUpRight,
@@ -14,7 +15,7 @@ import {
   Search,
   Sun,
 } from "lucide-react";
-import { profile, sections } from "@/lib/content";
+import { navigation, profile } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 type Command = {
@@ -28,7 +29,7 @@ type Command = {
 
 /**
  * ⌘K / Ctrl+K palette. Everything a recruiter needs — resume, email, links,
- * any section — one keystroke away, without hunting through the page.
+ * any page — one keystroke away, without hunting through the site.
  */
 export function CommandPalette() {
   const [open, setOpen] = useState(false);
@@ -38,6 +39,7 @@ export function CommandPalette() {
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
   const { resolvedTheme, setTheme } = useTheme();
+  const router = useRouter();
 
   const close = useCallback(() => {
     setOpen(false);
@@ -46,9 +48,9 @@ export function CommandPalette() {
   }, []);
 
   const commands = useMemo<Command[]>(() => {
-    const go = (id: string) => () => {
+    const go = (href: string) => () => {
       close();
-      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      router.push(href);
     };
     const openUrl = (url: string) => () => {
       close();
@@ -108,13 +110,13 @@ export function CommandPalette() {
         icon: Linkedin,
         run: openUrl(profile.linkedin),
       },
-      ...sections.map((section) => ({
-        id: `go-${section.id}`,
-        label: `Go to ${section.label}`,
-        hint: "Section",
-        keywords: `${section.label} jump navigate scroll section`,
+      ...navigation.map((item) => ({
+        id: `go-${item.href}`,
+        label: `Go to ${item.label}`,
+        hint: "Page",
+        keywords: `${item.label} jump navigate open page`,
         icon: ArrowUpRight,
-        run: go(section.id),
+        run: go(item.href),
       })),
       {
         id: "theme",
@@ -128,7 +130,7 @@ export function CommandPalette() {
         },
       },
     ];
-  }, [close, copied, resolvedTheme, setTheme]);
+  }, [close, copied, resolvedTheme, router, setTheme]);
 
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -218,7 +220,7 @@ export function CommandPalette() {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
             onKeyDown={onInputKeyDown}
-            placeholder="Jump to a section, grab my résumé, copy my email…"
+            placeholder="Jump to a page, grab my résumé, copy my email…"
             aria-label="Search commands"
             className="w-full bg-transparent py-4 text-sm text-fg outline-none placeholder:text-faint"
           />

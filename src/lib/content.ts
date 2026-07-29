@@ -307,10 +307,8 @@ export const certifications = [
   },
 ];
 
-export const sections = [
-  { id: "work", label: "Work" },
-  { id: "projects", label: "Projects" },
-  { id: "honors", label: "Honors" },
-  { id: "skills", label: "Skills" },
-  { id: "contact", label: "Contact" },
+export const navigation = [
+  { href: "/", label: "Home" },
+  { href: "/work", label: "Work" },
+  { href: "/honors", label: "Honors" },
 ];

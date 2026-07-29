@@ -1,4 +1,5 @@
-import { ArrowDown, Download, Github, Linkedin } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Download } from "lucide-react";
 import { ConsensusViz } from "@/components/consensus-viz";
 import { CopyEmail } from "@/components/copy-email";
 import { Reveal } from "@/components/reveal";
@@ -45,24 +46,6 @@ export function Hero() {
             >
               Get in touch
             </a>
-            <a
-              href={profile.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="grid size-10 place-items-center rounded-lg border border-line text-muted transition-colors hover:text-fg"
-            >
-              <Github className="size-4" />
-            </a>
-            <a
-              href={profile.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="grid size-10 place-items-center rounded-lg border border-line text-muted transition-colors hover:text-fg"
-            >
-              <Linkedin className="size-4" />
-            </a>
           </div>
 
           <CopyEmail className="mt-6" />
@@ -84,13 +67,16 @@ export function Hero() {
         </Reveal>
       </div>
 
-      <a
-        href="#work"
-        className="mt-16 inline-flex items-center gap-2 text-sm text-faint transition-colors hover:text-fg no-print"
+      <Link
+        href="/work"
+        className="group mt-16 inline-flex items-center gap-2 text-sm text-faint transition-colors hover:text-fg no-print"
       >
-        <ArrowDown className="size-3.5" aria-hidden />
         See the work
-      </a>
+        <ArrowRight
+          className="size-3.5 transition-transform duration-300 group-hover:translate-x-1"
+          aria-hidden
+        />
+      </Link>
     </section>
   );
 }

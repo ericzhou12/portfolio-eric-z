@@ -2,6 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/reveal";
 import { Section } from "@/components/section";
 import { projects } from "@/lib/content";
+import { cn } from "@/lib/utils";
 
 export function Projects() {
   return (
@@ -11,12 +12,12 @@ export function Projects() {
       title="Projects"
       intro="Things I built end to end — shipped, measured, and in front of real users or judges."
     >
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
         {projects.map((project, index) => (
           <Reveal
             key={project.title}
             delay={index * 60}
-            className={index === 0 ? "md:col-span-2" : undefined}
+            className={cn("h-full", index === 0 && "md:col-span-2 xl:col-span-1")}
           >
             <article className="flex h-full flex-col rounded-xl border border-line bg-surface p-6 transition-colors hover:border-accent/30 sm:p-8">
               <div className="flex items-baseline justify-between gap-4">
@@ -58,19 +59,22 @@ export function Projects() {
                 ))}
               </div>
 
-              <div className="mt-6 flex flex-wrap gap-4 border-t border-line pt-5">
-                {project.links.map((link) => (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 font-mono text-xs text-accent underline-offset-4 hover:underline"
-                  >
-                    {link.label}
-                    <ArrowUpRight className="size-3" aria-hidden />
-                  </a>
-                ))}
+              {/* mt-auto pins links to the card base so a row reads evenly. */}
+              <div className="mt-auto pt-6">
+                <div className="flex flex-wrap gap-4 border-t border-line pt-5">
+                  {project.links.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 font-mono text-xs text-accent underline-offset-4 hover:underline"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="size-3" aria-hidden />
+                    </a>
+                  ))}
+                </div>
               </div>
             </article>
           </Reveal>

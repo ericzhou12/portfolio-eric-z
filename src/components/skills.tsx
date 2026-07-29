@@ -6,11 +6,11 @@ export function Skills() {
   return (
     <Section
       id="skills"
-      index="04"
+      index="02"
       title="Skills"
       intro="What I reach for. Grouped so you can scan for the one you're hiring against."
     >
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {skills.map((group, index) => (
           <Reveal key={group.group} delay={index * 50}>
             <div>

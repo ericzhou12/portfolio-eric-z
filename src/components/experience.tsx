@@ -11,11 +11,15 @@ export function Experience() {
       title="Work"
       intro="Cloud infrastructure, distributed systems research, and the occasional smart contract audit."
     >
-      <ol className="space-y-4">
+      {/* The current role gets the full width; the rest pair up on wide screens. */}
+      <ol className="grid gap-4 xl:grid-cols-2">
         {experience.map((job, index) => (
-          <li key={`${job.org}-${job.role}`}>
-            <Reveal delay={index * 60}>
-              <article className="group rounded-xl border border-line bg-surface p-6 transition-colors hover:border-accent/30 sm:p-8">
+          <li
+            key={`${job.org}-${job.role}`}
+            className={index === 0 ? "xl:col-span-2" : undefined}
+          >
+            <Reveal delay={index * 60} className="h-full">
+              <article className="group h-full rounded-xl border border-line bg-surface p-6 transition-colors hover:border-accent/30 sm:p-8">
                 <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
                   <h3 className="text-lg font-semibold tracking-tight">
                     {job.role}
