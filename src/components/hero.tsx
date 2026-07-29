@@ -43,7 +43,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 rounded-lg bg-fg px-4 py-2.5 text-sm font-medium text-bg transition-opacity hover:opacity-85"
             >
               <Download className="size-4" aria-hidden />
-              Résumé
+              résumé
             </a>
             <a
               href={profile.github}
@@ -52,7 +52,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 rounded-lg border border-line px-4 py-2.5 text-sm font-medium text-fg transition-colors hover:border-accent/40 hover:bg-accent/5"
             >
               <Github className="size-4" aria-hidden />
-              GitHub
+              github
             </a>
             <a
               href={profile.linkedin}
@@ -61,7 +61,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 rounded-lg border border-line px-4 py-2.5 text-sm font-medium text-fg transition-colors hover:border-accent/40 hover:bg-accent/5"
             >
               <Linkedin className="size-4" aria-hidden />
-              LinkedIn
+              linkedin
             </a>
           </div>
 

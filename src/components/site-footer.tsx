@@ -18,7 +18,7 @@ export function SiteFooter() {
           <kbd className="rounded border border-line px-1.5 py-0.5 text-[0.6875rem] text-muted">
             {shortcut}
           </kbd>{" "}
-          anywhere · built with Next.js
+          anywhere · 
         </p>
       </div>
     </footer>
