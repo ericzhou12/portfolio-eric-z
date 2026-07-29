@@ -8,11 +8,15 @@ const links = [
 
 /**
  * Persistent, low-weight social links pinned to the bottom-right corner.
- * They sit at half opacity until hovered, then lift and unfurl their label.
+ * They sit at half opacity until hovered, then unfurl their label.
+ *
+ * Stacked vertically and right-aligned: each row's right edge is pinned, so an
+ * expanding label grows leftward into empty space instead of displacing its
+ * sibling.
  */
 export function SocialRail() {
   return (
-    <div className="fixed bottom-4 right-4 z-40 flex items-center gap-1 no-print sm:bottom-6 sm:right-6">
+    <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-0.5 no-print sm:bottom-6 sm:right-6">
       {links.map((link) => {
         const Icon = link.icon;
         return (
@@ -22,7 +26,7 @@ export function SocialRail() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={link.label}
-            className="group flex items-center rounded-full border border-transparent px-2.5 py-2 text-faint opacity-60 backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-line hover:bg-surface/80 hover:text-accent hover:opacity-100 hover:shadow-sm"
+            className="group flex items-center rounded-full border border-transparent px-2.5 py-2 text-faint opacity-60 backdrop-blur-sm transition-all duration-300 ease-out hover:border-line hover:bg-surface/80 hover:text-accent hover:opacity-100 hover:shadow-sm"
           >
             <Icon
               className="size-4 shrink-0 transition-transform duration-300 ease-out group-hover:scale-110"

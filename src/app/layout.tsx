@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SocialRail } from "@/components/social-rail";
 import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { profile } from "@/lib/content";
 import { shell } from "@/lib/utils";
 
@@ -110,6 +111,7 @@ export default function RootLayout({
 
           <SiteHeader />
           <CommandPalette />
+          <ThemeToggle />
           <SocialRail />
 
           <main id="content" className={shell}>

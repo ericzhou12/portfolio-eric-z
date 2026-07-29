@@ -3,38 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
-import { Moon, Sun } from "lucide-react";
 import { navigation } from "@/lib/content";
 import { useModifierKey } from "@/lib/use-modifier-key";
 import { cn, shell } from "@/lib/utils";
-
-function ThemeToggle() {
-  const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
-
-  return (
-    <button
-      type="button"
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      aria-label="Toggle color theme"
-      className="grid size-9 place-items-center rounded-lg border border-line text-muted transition-colors hover:text-fg"
-    >
-      {/* Render nothing icon-wise until mounted so SSR and client agree. */}
-      {mounted ? (
-        resolvedTheme === "dark" ? (
-          <Sun className="size-4" />
-        ) : (
-          <Moon className="size-4" />
-        )
-      ) : (
-        <span className="size-4" />
-      )}
-    </button>
-  );
-}
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -88,7 +59,8 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
+        {/* Right padding clears the theme toggle pinned to the viewport corner. */}
+        <div className="flex items-center gap-2 pr-9 sm:pr-7 lg:pr-0">
           <button
             type="button"
             onClick={() =>
@@ -99,7 +71,6 @@ export function SiteHeader() {
           >
             <span className="font-mono">{shortcut}</span>
           </button>
-          <ThemeToggle />
         </div>
       </div>
     </header>
