@@ -66,6 +66,14 @@
     outline-offset: 3px;
     border-radius: 2px;
   }
+
+  /* Tailwind v4 drops the UA pointer cursor on buttons; put it back. */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
 }
 
 @utility label-caps {
@@ -74,6 +82,27 @@
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--faint);
+}
+
+/* Per-entry graph tint. Both hexes ride inline as custom properties so the
+   node colour swaps with the theme without reading it in JS. */
+.node-tint {
+  color: var(--c);
+}
+
+.dark .node-tint {
+  color: var(--c-dk);
+}
+
+/* Marching dashes on the open-ended tail of anything still running. */
+@keyframes tail-march {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
+.tail-march {
+  animation: tail-march 1.4s linear infinite;
 }
 
 /* Section reveal — driven by IntersectionObserver in <Reveal />. */

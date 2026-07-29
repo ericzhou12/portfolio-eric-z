@@ -1,14 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { useTheme } from "next-themes";
+import { useEffect, useRef } from "react";
 import { clamp, fbm, hexToRgb, type Rgb } from "@/lib/flow-noise";
-import { cn } from "@/lib/utils";
 
 /**
- * A few thousand particles steered by a scrolling fractal-noise vector field,
- * painted as fading trails. The cursor drags a vortex through the flow; a click
- * blows the particles outward.
+ * Full-page backdrop: particles steered by a scrolling fractal-noise vector
+ * field, painted as fading trails. The cursor drags a vortex through the flow
+ * from anywhere on the page. Kept low-contrast so it stays behind the content.
  */
 
 const TAU = Math.PI * 2;
@@ -23,14 +21,14 @@ const DAMPING = 0.93;
 const MAX_SPEED = 2.7;
 const MIN_AGILITY = 0.55;
 const AGILITY_RANGE = 0.8;
-const TRAIL_FADE = 0.075;
+const TRAIL_FADE = 0.25;
 const POINTER_RADIUS = 130;
 const SWIRL = 1.15;
-const PULL = 0.35;
+const PULL = 0.6;
 const BURST = 9;
 const DENSITY = 0.0035; // particles per css px²
 const MIN_PARTICLES = 300;
-const MAX_PARTICLES = 1600;
+const MAX_PARTICLES = 800;
 const STILL_FRAMES = 700; // long-exposure frames for reduced-motion
 
 type Particle = {
@@ -44,30 +42,34 @@ type Particle = {
   agility: number;
 };
 
-export function FlowField({ className }: { className?: string }) {
+export function FlowField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const pointerRef = useRef({ x: 0, y: 0, active: false });
-  const paletteRef = useRef<{ accent: Rgb; surface: Rgb }>({
-    accent: [180, 154, 239],
-    surface: [255, 255, 255],
-  });
+  const accentRef = useRef<Rgb>([180, 154, 239]);
   const repaintRef = useRef(0);
-  const { resolvedTheme } = useTheme();
-  const [stats, setStats] = useState({ count: 0, fps: 0 });
 
-  // Re-read the palette whenever the theme flips, and force a canvas wipe so
-  // trails painted in the old background colour don't linger.
+  // Watching the class attribute rather than next-themes' resolvedTheme: an
+  // effect keyed on that can run before the class lands, and then getComputedStyle
+  // hands back the outgoing palette.
   useEffect(() => {
-    const styles = getComputedStyle(document.documentElement);
-    const read = (name: string, fallback: Rgb) =>
-      hexToRgb(styles.getPropertyValue(name), fallback);
-    paletteRef.current = {
-      accent: read("--accent", [180, 154, 239]),
-      surface: read("--surface", [255, 255, 255]),
+    const read = () => {
+      const styles = getComputedStyle(document.documentElement);
+      accentRef.current = hexToRgb(
+        styles.getPropertyValue("--accent"),
+        [180, 154, 239],
+      );
+      repaintRef.current += 1;
     };
-    repaintRef.current += 1;
-  }, [resolvedTheme]);
+
+    read();
+    const observer = new MutationObserver(read);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -84,8 +86,6 @@ export function FlowField({ className }: { className?: string }) {
     let raf = 0;
     let time = 0;
     let onScreen = true;
-    let frames = 0;
-    let fpsMark = performance.now();
     let lastRepaint = repaintRef.current;
 
     const spawn = (): Particle => {
@@ -114,11 +114,7 @@ export function FlowField({ className }: { className?: string }) {
       p.agility = MIN_AGILITY + Math.random() * AGILITY_RANGE;
     };
 
-    const wipe = () => {
-      const [r, g, b] = paletteRef.current.surface;
-      ctx.fillStyle = `rgb(${r},${g},${b})`;
-      ctx.fillRect(0, 0, width, height);
-    };
+    const wipe = () => ctx.clearRect(0, 0, width, height);
 
     const step = () => {
       time += 1;
@@ -175,7 +171,7 @@ export function FlowField({ className }: { className?: string }) {
     // Segments are bucketed by speed so the whole frame is three stroke calls
     // rather than one per particle.
     const paint = () => {
-      const [r, g, b] = paletteRef.current.accent;
+      const [r, g, b] = accentRef.current;
       const slow: number[] = [];
       const mid: number[] = [];
       const fast: number[] = [];
@@ -205,10 +201,13 @@ export function FlowField({ className }: { className?: string }) {
       }
     };
 
+    // Erase toward transparent instead of painting the page colour on, so the
+    // canvas never owns the background and the theme is pure CSS.
     const fade = () => {
-      const [r, g, b] = paletteRef.current.surface;
-      ctx.fillStyle = `rgba(${r},${g},${b},${TRAIL_FADE})`;
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.fillStyle = `rgba(0,0,0,${TRAIL_FADE})`;
       ctx.fillRect(0, 0, width, height);
+      ctx.globalCompositeOperation = "source-over";
     };
 
     const seed = () => {
@@ -216,7 +215,6 @@ export function FlowField({ className }: { className?: string }) {
         clamp(width * height * DENSITY, MIN_PARTICLES, MAX_PARTICLES),
       );
       particlesRef.current = Array.from({ length: target }, spawn);
-      setStats((prev) => ({ ...prev, count: target }));
     };
 
     // A single accumulated exposure stands in for the animation when the user
@@ -252,34 +250,23 @@ export function FlowField({ className }: { className?: string }) {
         fade();
         step();
         paint();
-        frames += 1;
-        const now = performance.now();
-        if (now - fpsMark >= 500) {
-          const fps = Math.round((frames * 1000) / (now - fpsMark));
-          setStats((prev) => (prev.fps === fps ? prev : { ...prev, fps }));
-          frames = 0;
-          fpsMark = now;
-        }
       }
       raf = requestAnimationFrame(frame);
     };
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        onScreen = entry.isIntersecting;
-      },
-      { threshold: 0 },
-    );
-    observer.observe(canvas);
+    const onVisibility = () => {
+      onScreen = !document.hidden;
+    };
 
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(canvas);
 
+    // The canvas sits behind the page, so the vortex tracks the window rather
+    // than the element — otherwise content would swallow every pointer move.
     const onPointerMove = (event: PointerEvent) => {
-      const rect = canvas.getBoundingClientRect();
       pointerRef.current = {
-        x: event.clientX - rect.left,
-        y: event.clientY - rect.top,
+        x: event.clientX,
+        y: event.clientY,
         active: true,
       };
     };
@@ -289,12 +276,9 @@ export function FlowField({ className }: { className?: string }) {
     };
 
     const onPointerDown = (event: PointerEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      const cx = event.clientX - rect.left;
-      const cy = event.clientY - rect.top;
       for (const p of particlesRef.current) {
-        const dx = p.x - cx;
-        const dy = p.y - cy;
+        const dx = p.x - event.clientX;
+        const dy = p.y - event.clientY;
         const d = Math.hypot(dx, dy) || 1;
         if (d < POINTER_RADIUS * 1.6) {
           const push = (1 - d / (POINTER_RADIUS * 1.6)) * BURST;
@@ -304,50 +288,29 @@ export function FlowField({ className }: { className?: string }) {
       }
     };
 
-    canvas.addEventListener("pointermove", onPointerMove);
-    canvas.addEventListener("pointerleave", onPointerLeave);
-    canvas.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("pointerleave", onPointerLeave);
+    document.addEventListener("visibilitychange", onVisibility);
 
     resize();
     if (!reduced) raf = requestAnimationFrame(frame);
 
     return () => {
       cancelAnimationFrame(raf);
-      observer.disconnect();
       resizeObserver.disconnect();
-      canvas.removeEventListener("pointermove", onPointerMove);
-      canvas.removeEventListener("pointerleave", onPointerLeave);
-      canvas.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("pointerleave", onPointerLeave);
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 
   return (
-    <figure
-      className={cn(
-        "overflow-hidden rounded-xl border border-line bg-surface p-4 sm:p-5",
-        className,
-      )}
-    >
-      <figcaption className="mb-3 flex items-baseline justify-between gap-3">
-        <span className="label-caps">Flow field · live</span>
-        <span className="font-mono text-[0.6875rem] tabular-nums text-faint">
-          {stats.count} particles{stats.fps ? ` · ${stats.fps} fps` : ""}
-        </span>
-      </figcaption>
-
-      <canvas
-        ref={canvasRef}
-        // max-h keeps the canvas from forcing the page past one viewport; the
-        // simulation reads its own box, so a non-square field is fine.
-        className="block aspect-square max-h-[42dvh] w-full cursor-crosshair touch-none rounded-lg lg:max-h-[46dvh]"
-        role="img"
-        aria-label="Animated field of particles flowing along smooth noise currents, reacting to the cursor."
-      />
-
-      <p className="mt-3 text-xs leading-relaxed text-faint">
-        Particles ride a fractal-noise vector field that drifts as it runs. Move
-        the cursor to pull a vortex through the current; click to scatter them.
-      </p>
-    </figure>
+    <canvas
+      ref={canvasRef}
+      aria-hidden
+      className="fixed inset-0 -z-10 size-full no-print"
+    />
   );
 }

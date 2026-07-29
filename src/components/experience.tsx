@@ -6,9 +6,9 @@ import { experience } from "@/lib/content";
 export function Experience() {
   return (
     <Section
-      id="work"
+      id="experience"
       index="01"
-      title="Work"
+      title="Experience"
       intro="Cloud infrastructure, distributed systems research, and the occasional smart contract audit."
     >
       {/* The current role gets the full width; the rest pair up on wide screens. */}

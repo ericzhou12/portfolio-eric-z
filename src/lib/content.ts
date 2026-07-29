@@ -21,11 +21,23 @@ export const facts: { label: string; value: string }[] = [
   { label: "Based", value: "Troy, MI / Evanston, IL" },
 ];
 
+/** Light/dark pair so node tints can swap via CSS alone, with no theme read. */
+export type NodeColor = { light: string; dark: string };
+
+/** month is 1-12; the pair sorts as year * 12 + month inside a graph layer. */
+export type TimePoint = { year: number; month: number };
+
 export type Job = {
+  id: string;
   role: string;
   org: string;
   orgUrl?: string;
   period: string;
+  start: TimePoint;
+  end: TimePoint | "present";
+  color: NodeColor;
+  /** Optional path under /public, e.g. "/logos/tyler.svg". Falls back to initials. */
+  logo?: string;
   location: string;
   kind: string;
   summary: string;
@@ -37,10 +49,14 @@ export type Job = {
 
 export const experience: Job[] = [
   {
+    id: "tyler",
     role: "Software Development Engineer Intern",
     org: "Tyler Technologies",
     orgUrl: "https://www.tylertech.com",
     period: "May 2026 — Present",
+    start: { year: 2026, month: 5 },
+    end: "present",
+    color: { light: "#0f766e", dark: "#2ea395" },
     location: "Troy, MI · On-site",
     kind: "Internship",
     summary:
@@ -70,10 +86,14 @@ export const experience: Job[] = [
     ],
   },
   {
+    id: "simons",
     role: "Simons Research Fellow in Computer Science",
     org: "Stony Brook University",
     orgUrl: "https://www.stonybrook.edu",
     period: "Jun 2025 — Jun 2026",
+    start: { year: 2025, month: 6 },
+    end: { year: 2026, month: 6 },
+    color: { light: "#b03636", dark: "#e07a7a" },
     location: "Stony Brook, NY",
     kind: "Research · PI: Dr. Mohammad Javad Amiri",
     summary:
@@ -103,10 +123,14 @@ export const experience: Job[] = [
     ],
   },
   {
+    id: "morgan-stanley",
     role: "Finance Academy Participant",
     org: "Morgan Stanley",
     orgUrl: "https://www.morganstanley.com",
     period: "Oct 2025 — Mar 2026",
+    start: { year: 2025, month: 10 },
+    end: { year: 2026, month: 3 },
+    color: { light: "#1f6fa8", dark: "#5aa7d8" },
     location: "Remote",
     kind: "Program",
     summary:
@@ -119,10 +143,14 @@ export const experience: Job[] = [
     stack: ["Valuation", "Case Studies", "Financial Modeling"],
   },
   {
+    id: "wayne",
     role: "Blockchain Research Assistant",
     org: "Wayne State University",
     orgUrl: "https://wayne.edu",
     period: "May 2024 — Oct 2025",
+    start: { year: 2024, month: 5 },
+    end: { year: 2025, month: 10 },
+    color: { light: "#0f6b3f", dark: "#41a877" },
     location: "Troy, MI · Hybrid",
     kind: "Research · PI: Dr. Shiyong Lu",
     summary:
@@ -136,9 +164,13 @@ export const experience: Job[] = [
     stack: ["Solidity", "Ethereum", "Sepolia Testnet", "AI Agents"],
   },
   {
+    id: "boardx",
     role: "Software Engineer & QA Intern",
     org: "BoardX",
     period: "Apr 2022 — Aug 2022",
+    start: { year: 2022, month: 4 },
+    end: { year: 2022, month: 8 },
+    color: { light: "#5b6b8c", dark: "#93a3c4" },
     location: "Troy, MI · Remote",
     kind: "Internship",
     summary:
@@ -152,9 +184,14 @@ export const experience: Job[] = [
 ];
 
 export type Project = {
+  id: string;
   title: string;
   tagline: string;
   year: string;
+  start: TimePoint;
+  end: TimePoint | "present";
+  color: NodeColor;
+  logo?: string;
   description: string;
   highlights: string[];
   tags: string[];
@@ -163,9 +200,13 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    id: "new-page",
     title: "The New Page Project",
     tagline: "Nonprofit platform for global book donation logistics",
     year: "2025",
+    start: { year: 2025, month: 1 },
+    end: { year: 2025, month: 12 },
+    color: { light: "#c2620a", dark: "#e0913c" },
     description:
       "Solo-built and deployed the React site for a literacy nonprofit, handling outreach, SEO, and donation logistics.",
     highlights: [
@@ -176,9 +217,13 @@ export const projects: Project[] = [
     links: [{ label: "thenewpageproject.com", href: "https://www.thenewpageproject.com" }],
   },
   {
+    id: "aquanet",
     title: "AquaNet",
     tagline: "Neural network for lake water quality assessment",
     year: "2025",
+    start: { year: 2025, month: 1 },
+    end: { year: 2025, month: 12 },
+    color: { light: "#0e7490", dark: "#38b6d8" },
     description:
       "An artificial neural network predicting water quality indicators in lakes from EPA environmental data.",
     highlights: [
@@ -195,9 +240,13 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: "black-litterman",
     title: "Modified Black-Litterman Model",
     tagline: "Sector-level allocation with SLSQP Sharpe optimization",
     year: "2025",
+    start: { year: 2025, month: 1 },
+    end: { year: 2025, month: 12 },
+    color: { light: "#8a6d10", dark: "#c9a52c" },
     description:
       "A modified Black-Litterman stock allocation model distributing capital by sector, optimizing the Sharpe ratio via SLSQP.",
     highlights: [
@@ -309,6 +358,6 @@ export const certifications = [
 
 export const navigation = [
   { href: "/", label: "Home" },
-  { href: "/work", label: "Work" },
+  { href: "/experience", label: "Experience" },
   { href: "/honors", label: "Honors" },
 ];
