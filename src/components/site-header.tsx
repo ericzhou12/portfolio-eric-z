@@ -4,13 +4,11 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { navigation } from "@/lib/content";
-import { useModifierKey } from "@/lib/use-modifier-key";
 import { cn, shell } from "@/lib/utils";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const shortcut = useModifierKey();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -37,7 +35,8 @@ export function SiteHeader() {
           <span className="text-accent">.</span>
         </Link>
 
-        <nav aria-label="Pages">
+        {/* Right padding clears the theme toggle pinned to the viewport corner. */}
+        <nav aria-label="Pages" className="pr-9 sm:pr-7 lg:pr-0">
           <ul className="flex items-center gap-1">
             {navigation.map((item) => {
               const active = pathname === item.href;
@@ -58,20 +57,6 @@ export function SiteHeader() {
             })}
           </ul>
         </nav>
-
-        {/* Right padding clears the theme toggle pinned to the viewport corner. */}
-        <div className="flex items-center gap-2 pr-9 sm:pr-7 lg:pr-0">
-          <button
-            type="button"
-            onClick={() =>
-              window.dispatchEvent(new Event("open-command-palette"))
-            }
-            aria-label="Open command palette"
-            className="hidden items-center gap-2 rounded-lg border border-line px-2.5 py-1.5 text-xs text-faint transition-colors hover:text-fg sm:flex"
-          >
-            <span className="font-mono">{shortcut}</span>
-          </button>
-        </div>
       </div>
     </header>
   );
