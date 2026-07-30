@@ -434,7 +434,7 @@ export function ExperienceGraph() {
                       setFocus(node.layer);
                       toggleSelected(node.entryId);
                     }}
-                    className="node-tint absolute flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition-opacity duration-300 ease-out"
+                    className="node-tint absolute flex size-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full transition-opacity duration-300 ease-out"
                     style={{
                       ...tint(node.entryId),
                       left: `${node.x}%`,
@@ -461,14 +461,14 @@ export function ExperienceGraph() {
                     {isLive ? (
                       <span
                         aria-hidden
-                        className="absolute inline-flex size-11 animate-ping rounded-full bg-current opacity-20"
+                        className="absolute inline-flex size-12 animate-ping rounded-full bg-current opacity-20"
                       />
                     ) : null}
 
                     <span
                       aria-hidden
                       className={cn(
-                        "relative flex size-11 items-center justify-center overflow-hidden rounded-full border-2 border-current bg-surface transition-transform duration-300",
+                        "relative flex size-12 items-center justify-center overflow-hidden rounded-full border-2 border-current bg-surface transition-transform duration-300",
                         // Dashed ring marks the closing node of a span.
                         !isStart && "border-dashed",
                         isActive && "scale-110",
@@ -480,10 +480,14 @@ export function ExperienceGraph() {
                         <Image
                           src={entry.logo}
                           alt=""
-                          width={26}
-                          height={26}
+                          width={48}
+                          height={48}
                           className={cn(
-                            "size-[26px] object-contain",
+                            // Solid-background marks bleed to the ring and get
+                            // cropped by it; transparent ones sit inset.
+                            entry.logoFill
+                              ? "size-full scale-105 object-cover"
+                              : "size-[30px] object-contain",
                             !isStart && "opacity-55",
                           )}
                         />

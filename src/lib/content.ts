@@ -38,6 +38,8 @@ export type Job = {
   color: NodeColor;
   /** Optional path under /public, e.g. "/logos/tyler.svg". Falls back to initials. */
   logo?: string;
+  /** Set for solid-background marks: the logo bleeds to the node edge, cropped. */
+  logoFill?: boolean;
   location: string;
   kind: string;
   summary: string;
@@ -53,10 +55,11 @@ export const experience: Job[] = [
     role: "Software Development Engineer Intern",
     org: "Tyler Technologies",
     orgUrl: "https://www.tylertech.com",
+    logo: "/logos/tylertech.png",
     period: "May 2026 — Present",
     start: { year: 2026, month: 5 },
     end: "present",
-    color: { light: "#0f766e", dark: "#2ea395" },
+    color: { light: "#415390", dark: "#415390" },
     location: "Troy, MI · On-site",
     kind: "Internship",
     summary:
@@ -90,10 +93,12 @@ export const experience: Job[] = [
     role: "Simons Research Fellow in Computer Science",
     org: "Stony Brook University",
     orgUrl: "https://www.stonybrook.edu",
+    logo: "/logos/stonybrook.jpg",
+    logoFill: true,
     period: "Jun 2025 — Jun 2026",
     start: { year: 2025, month: 6 },
     end: { year: 2026, month: 6 },
-    color: { light: "#b03636", dark: "#e07a7a" },
+    color: { light: "#990100", dark: "#990100" },
     location: "Stony Brook, NY",
     kind: "Research · PI: Dr. Mohammad Javad Amiri",
     summary:
@@ -127,10 +132,12 @@ export const experience: Job[] = [
     role: "Finance Academy Participant",
     org: "Morgan Stanley",
     orgUrl: "https://www.morganstanley.com",
+    logo: "/logos/morganstanley.png",
+    logoFill: true,
     period: "Oct 2025 — Mar 2026",
     start: { year: 2025, month: 10 },
     end: { year: 2026, month: 3 },
-    color: { light: "#1f6fa8", dark: "#5aa7d8" },
+    color: { light: "#012c51", dark: "#012c51" },
     location: "Remote",
     kind: "Program",
     summary:
@@ -147,10 +154,11 @@ export const experience: Job[] = [
     role: "Blockchain Research Assistant",
     org: "Wayne State University",
     orgUrl: "https://wayne.edu",
+    logo: "/logos/waynestate.svg",
     period: "May 2024 — Oct 2025",
     start: { year: 2024, month: 5 },
     end: { year: 2025, month: 10 },
-    color: { light: "#0f6b3f", dark: "#41a877" },
+    color: { light: "#35746b", dark: "#35746b" },
     location: "Troy, MI · Hybrid",
     kind: "Research · PI: Dr. Shiyong Lu",
     summary:
@@ -167,10 +175,12 @@ export const experience: Job[] = [
     id: "boardx",
     role: "Software Engineer & QA Intern",
     org: "BoardX",
+    logo: "/logos/boardx.jpg",
+    logoFill: true,
     period: "Apr 2022 — Aug 2022",
     start: { year: 2022, month: 4 },
     end: { year: 2022, month: 8 },
-    color: { light: "#5b6b8c", dark: "#93a3c4" },
+    color: { light: "#f25579", dark: "#f25579" },
     location: "Troy, MI · Remote",
     kind: "Internship",
     summary:
@@ -192,6 +202,7 @@ export type Project = {
   end: TimePoint | "present";
   color: NodeColor;
   logo?: string;
+  logoFill?: boolean;
   description: string;
   highlights: string[];
   tags: string[];
@@ -347,12 +358,12 @@ export const education = [
   },
 ];
 
-export const certifications = [
+export const certifications= [
   { title: "Options 101", org: "Akuna Capital", year: "2026" },
   {
-    title: "Global High School Investment Competition",
-    org: "Wharton Global Youth Program",
-    year: "2025",
+    title: "YC Startup School",
+    org: "Y Combinator",
+    year: "2026",
   },
 ];
 

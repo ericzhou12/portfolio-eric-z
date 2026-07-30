@@ -28,8 +28,8 @@ const BUCKET_FLOOR = 2024;
 export const LAYER_GAP = 24;
 
 export const BANDS = {
-  work: { min: 13, max: 41, gap: 14 },
-  project: { min: 59, max: 89, gap: 13 },
+  work: { min: 11, max: 43, gap: 16 },
+  project: { min: 57, max: 89, gap: 16 },
 } as const;
 
 /** Where the two bands meet — one constant so the rule and its label agree. */
@@ -58,6 +58,7 @@ export type GraphEntry = {
   label: string;
   initials: string;
   logo?: string;
+  logoFill?: boolean;
   title: string;
   subtitle: string;
   period: string;
@@ -116,6 +117,7 @@ export const entries: GraphEntry[] = [
     label: shortOrg(job.org),
     initials: initialsOf(job.org),
     logo: job.logo,
+    logoFill: job.logoFill,
     title: job.role,
     subtitle: job.org,
     period: job.period,
@@ -132,6 +134,7 @@ export const entries: GraphEntry[] = [
     label: shortTitle(project.title),
     initials: initialsOf(shortTitle(project.title)),
     logo: project.logo,
+    logoFill: project.logoFill,
     title: project.title,
     subtitle: project.tagline,
     period: project.year,

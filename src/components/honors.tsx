@@ -8,7 +8,7 @@ export function Honors() {
       id="honors"
       index="01"
       title="Honors"
-      intro="Selected recognition, plus where I've studied."
+      intro="selected recognition"
     >
       <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
         <Reveal>
@@ -57,7 +57,7 @@ export function Honors() {
             </div>
 
             <div>
-              <h3 className="label-caps">Certifications</h3>
+              <h3 className="label-caps">Certifications + Misc</h3>
               <ul className="mt-4 space-y-3">
                 {certifications.map((cert) => (
                   <li

@@ -7,8 +7,8 @@ export function Skills() {
     <Section
       id="skills"
       index="02"
-      title="Skills"
-      intro="What I reach for. Grouped so you can scan for the one you're hiring against."
+      title="Stuff I Use"
+      intro="tools, languages, frameworks i build with; find what's useful to you"
     >
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {skills.map((group, index) => (

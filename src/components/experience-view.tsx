@@ -70,7 +70,7 @@ export function ExperienceView({ children }: { children: React.ReactNode }) {
         <section
           id="experience-graph"
           aria-labelledby="experience-graph-title"
-          className="flex flex-col pb-5 pt-12 sm:pt-16 md:h-[calc(100dvh-8.5rem)]"
+          className="flex flex-col pb-5 pt-4 sm:pt-6 md:h-[calc(100dvh-8.5rem)]"
         >
           <header className="flex items-end justify-between gap-4">
             <div>
@@ -87,7 +87,7 @@ export function ExperienceView({ children }: { children: React.ReactNode }) {
           </header>
 
           {/* Unmounted in list view so its global arrow-key listener goes away. */}
-          <div className="mt-6 min-h-0 flex-1">
+          <div className="mt-4 min-h-0 flex-1">
             {view === "graph" ? <ExperienceGraph /> : null}
           </div>
         </section>
