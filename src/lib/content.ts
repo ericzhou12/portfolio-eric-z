@@ -11,6 +11,7 @@ export const profile = {
   site: "https://erichyzhou.vercel.app",
   github: "https://github.com/ericzhou12",
   linkedin: "https://www.linkedin.com/in/erichyzhou/",
+  lastfm: "https://www.last.fm/user/erichyzhou",
   resume: "/eric-zhou-resume.pdf",
   status: "SDE Intern @ Tyler Technologies",
 };

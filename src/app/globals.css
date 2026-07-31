@@ -50,6 +50,10 @@
   }
 
   body {
+    /* `clip`, not `hidden`: keeps the unclipped now-playing glow from widening
+       the page without turning the body into a scroll container (which would
+       break the sticky header). */
+    overflow-x: clip;
     background-color: var(--bg);
     color: var(--fg);
     -webkit-font-smoothing: antialiased;
@@ -105,6 +109,95 @@
   animation: tail-march 1.4s linear infinite;
 }
 
+/* Purple glow behind the status line while a track is playing. Blobs drift and
+   morph on independent timings so the field never visibly loops. */
+.blob-field {
+  --glow-opacity: 0.65;
+  opacity: 0;
+  scale: 0.7;
+  animation:
+    blob-in 1.6s ease 200ms forwards,
+    blob-breathe 7s ease-in-out 1.8s infinite;
+}
+
+.dark .blob-field {
+  --glow-opacity: 0.34;
+}
+
+.blob {
+  position: absolute;
+  translate: -50% -50%;
+  border-radius: var(--shape1);
+  filter: blur(34px);
+  animation:
+    blob-drift var(--drift-duration) ease-in-out infinite alternate,
+    blob-morph var(--morph-duration) ease-in-out infinite alternate;
+  animation-delay: var(--drift-delay), var(--morph-delay);
+}
+
+@keyframes blob-in {
+  to {
+    opacity: var(--glow-opacity);
+    scale: 1;
+  }
+}
+
+@keyframes blob-breathe {
+  0%,
+  100% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.09;
+  }
+}
+
+@keyframes blob-morph {
+  0% {
+    border-radius: var(--shape1);
+  }
+  33% {
+    border-radius: var(--shape2);
+  }
+  66% {
+    border-radius: var(--shape3);
+  }
+  100% {
+    border-radius: var(--shape4);
+  }
+}
+
+@keyframes blob-drift {
+  0% {
+    translate: -50% -50%;
+  }
+  33% {
+    translate: calc(-50% + var(--dx1)) calc(-50% + var(--dy1));
+  }
+  66% {
+    translate: calc(-50% + var(--dx2)) calc(-50% + var(--dy2));
+  }
+  100% {
+    translate: calc(-50% + var(--dx3)) calc(-50% + var(--dy3));
+  }
+}
+
+/* Equalizer bars for the now-playing widget; each bar offsets its own delay. */
+@keyframes eq-bounce {
+  0%,
+  100% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.eq-bar {
+  transform-origin: bottom;
+  animation: eq-bounce 0.9s ease-in-out infinite;
+}
+
 /* Section reveal — driven by IntersectionObserver in <Reveal />. */
 .reveal {
   opacity: 0;
@@ -128,6 +221,16 @@
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .blob-field {
+    animation: none;
+    opacity: var(--glow-opacity);
+    scale: 1;
+  }
+
+  .blob {
+    animation: none;
   }
 
   *,

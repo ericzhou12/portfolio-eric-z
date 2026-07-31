@@ -1,6 +1,8 @@
 # music.md — Last.fm "now playing" plan
 
-Plan only. Nothing here is implemented yet.
+**Status: code is implemented.** Route handler, normalizer, widget and footer mount are all in.
+What is left is credentials — see §1, steps 1/2/4. Album art (§5) is returned by the API but not
+yet rendered.
 
 Goal: show what Eric is listening to right now — or what he last listened to — somewhere on the
 site, sourced from Last.fm (which scrobbles from Spotify/Apple Music once connected).
@@ -144,7 +146,25 @@ Optional. If used:
 
 ---
 
-## 6. Placement — undecided
+## 6. Placement — decided: hero status line
+
+Two slots, driven by one shared poller (`src/lib/use-now-playing.ts`) so both mount without doubling
+the request rate:
+
+- **Hero status line** — `src/components/status-line.tsx`. Default is the pulsing dot +
+  `profile.status`. While a track is **actively playing** it swaps to a purple blob-gradient glow +
+  equalizer + `now playing: <cover> Artist — Title`.
+- **Footer** — `src/components/now-playing-line.tsx`. Always present once there is a track:
+  equalizer + `currently playing: Artist — Title` while live, `♪ last played: Artist — Title 3h ago`
+  otherwise (relative time off `date.uts`). Deliberately duplicates the hero while live.
+
+Both link to `profile.lastfm`, not the per-track page.
+
+The glow is `position: absolute` and unclipped, so it adds no height — the one-viewport lock from
+commit `cc84ce0` holds. `body { overflow-x: clip }` in `globals.css` is what stops the blur bleed
+from widening the page; `clip` rather than `hidden` so the sticky header keeps working.
+
+Original options considered:
 
 | Option | Notes |
 |---|---|

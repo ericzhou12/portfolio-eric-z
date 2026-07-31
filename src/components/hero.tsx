@@ -3,6 +3,7 @@ import { ArrowRight, Download, Github, Linkedin } from "lucide-react";
 import { CopyEmail } from "@/components/copy-email";
 import { ExperiencePreview } from "@/components/experience-preview";
 import { Reveal } from "@/components/reveal";
+import { StatusLine } from "@/components/status-line";
 import { facts, profile } from "@/lib/content";
 
 export function Hero() {
@@ -13,13 +14,7 @@ export function Hero() {
     >
       <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
         <Reveal>
-          <div className="flex items-center gap-2.5">
-            <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
-              <span className="relative inline-flex size-2 rounded-full bg-accent" />
-            </span>
-            <span className="label-caps">{profile.status}</span>
-          </div>
+          <StatusLine />
 
           <h1 className="mt-5 text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
             {profile.name}

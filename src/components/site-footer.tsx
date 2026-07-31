@@ -1,5 +1,6 @@
 "use client";
 
+import { NowPlayingLine } from "@/components/now-playing-line";
 import { profile } from "@/lib/content";
 import { useModifierKey } from "@/lib/use-modifier-key";
 
@@ -13,12 +14,15 @@ export function SiteFooter() {
         <p className="font-mono">
           © {new Date().getFullYear()} {profile.name}
         </p>
-        <p className="font-mono">
-          Press{" "}
-          <kbd className="rounded border border-line px-1.5 py-0.5 text-[0.6875rem] text-muted">
-            {shortcut}
-          </kbd>{" "}
-          anywhere · 
+        <p className="flex flex-wrap items-center gap-2 font-mono">
+          <span>
+            Press{" "}
+            <kbd className="rounded border border-line px-1.5 py-0.5 text-[0.6875rem] text-muted">
+              {shortcut}
+            </kbd>{" "}
+            anywhere
+          </span>
+          <NowPlayingLine />
         </p>
       </div>
     </footer>
