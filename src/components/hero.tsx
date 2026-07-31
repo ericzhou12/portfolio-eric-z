@@ -2,21 +2,17 @@ import Link from "next/link";
 import { ArrowRight, Download, Github, Linkedin } from "lucide-react";
 import { CopyEmail } from "@/components/copy-email";
 import { ExperiencePreview } from "@/components/experience-preview";
-import { FlowField } from "@/components/flow-field";
 import { Reveal } from "@/components/reveal";
 import { facts, profile } from "@/lib/content";
 
 export function Hero() {
   return (
-    <>
-      <FlowField />
-
-      <section
-        id="top"
-        className="relative z-10 flex flex-1 flex-col justify-center py-10 lg:py-6"
-      >
-        <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
-          <Reveal>
+    <section
+      id="top"
+      className="relative z-10 flex flex-1 flex-col justify-center py-10 lg:py-6"
+    >
+      <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
+        <Reveal>
           <div className="flex items-center gap-2.5">
             <span className="relative flex size-2">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
@@ -81,24 +77,23 @@ export function Hero() {
               </div>
             ))}
           </dl>
-          </Reveal>
+        </Reveal>
 
-          <Reveal delay={120}>
-            <ExperiencePreview href="/experience" />
-          </Reveal>
-        </div>
+        <Reveal delay={120}>
+          <ExperiencePreview href="/experience" />
+        </Reveal>
+      </div>
 
-        <Link
-          href="/experience"
-          className="group mt-8 inline-flex items-center gap-2 self-start text-sm text-faint transition-colors hover:text-fg no-print lg:mt-6"
-        >
-          See the work
-          <ArrowRight
-            className="size-3.5 transition-transform duration-300 group-hover:translate-x-1"
-            aria-hidden
-          />
-        </Link>
-      </section>
-    </>
+      <Link
+        href="/experience"
+        className="group mt-8 inline-flex items-center gap-2 self-start text-sm text-faint transition-colors hover:text-fg no-print lg:mt-6"
+      >
+        See the work
+        <ArrowRight
+          className="size-3.5 transition-transform duration-300 group-hover:translate-x-1"
+          aria-hidden
+        />
+      </Link>
+    </section>
   );
 }
