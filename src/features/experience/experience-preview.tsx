@@ -13,7 +13,7 @@ import {
   spans,
   tailPath,
   type GraphNode,
-} from "@/lib/graph";
+} from "@/features/experience/graph";
 import { cn } from "@/lib/utils";
 
 /**

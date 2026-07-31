@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { Honors } from "@/components/honors";
-import { Skills } from "@/components/skills";
+import { Honors } from "@/features/honors/honors";
+import { Skills } from "@/features/honors/skills";
 
 export const metadata: Metadata = {
   title: "Honors",

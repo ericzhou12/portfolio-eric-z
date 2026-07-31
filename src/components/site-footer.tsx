@@ -1,6 +1,6 @@
 "use client";
 
-import { NowPlayingLine } from "@/components/now-playing-line";
+import { NowPlayingLine } from "@/features/music/now-playing-line";
 import { profile } from "@/lib/content";
 import { useModifierKey } from "@/lib/use-modifier-key";
 

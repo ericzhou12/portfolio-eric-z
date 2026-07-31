@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { GripVertical, X } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ExperienceDetailPanel } from "@/components/experience-detail-panel";
+import { ExperienceDetailPanel } from "@/features/experience/experience-detail-panel";
 import {
   BAND_BOUNDARY,
   CONTENT_WIDTH,
@@ -18,7 +18,7 @@ import {
   ongoing,
   spans,
   tailPath,
-} from "@/lib/graph";
+} from "@/features/experience/graph";
 import { cn } from "@/lib/utils";
 
 const tint = (entryId: string) => {

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { ArrowRight, Download, Github, Linkedin } from "lucide-react";
-import { CopyEmail } from "@/components/copy-email";
-import { ExperiencePreview } from "@/components/experience-preview";
+import { CopyEmail } from "@/features/home/copy-email";
+import { ExperiencePreview } from "@/features/experience/experience-preview";
 import { Reveal } from "@/components/reveal";
-import { StatusLine } from "@/components/status-line";
+import { StatusLine } from "@/features/music/status-line";
 import { facts, profile } from "@/lib/content";
 
 export function Hero() {

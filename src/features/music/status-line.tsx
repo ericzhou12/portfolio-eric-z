@@ -1,9 +1,9 @@
 "use client";
 
-import { Equalizer } from "@/components/equalizer";
-import { TrackCover } from "@/components/track-cover";
+import { Equalizer } from "@/features/music/equalizer";
+import { TrackCover } from "@/features/music/track-cover";
 import { profile } from "@/lib/content";
-import { useNowPlaying } from "@/lib/use-now-playing";
+import { useNowPlaying } from "@/features/music/use-now-playing";
 
 // Purple field behind the status line. Unclipped, so the blur bleeds past the
 // text — body's `overflow-x: clip` is what keeps that from widening the page.

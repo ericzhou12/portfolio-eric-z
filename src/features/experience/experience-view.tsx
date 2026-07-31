@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ExperienceGraph } from "@/components/experience-graph";
+import { ExperienceGraph } from "@/features/experience/experience-graph";
 import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "experience-view";

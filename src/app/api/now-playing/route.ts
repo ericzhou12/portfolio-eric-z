@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { EMPTY, normalize, type LastfmResponse } from "@/lib/now-playing";
+import { EMPTY, normalize, type LastfmResponse } from "@/features/music/now-playing";
 
 export const revalidate = 30;
 

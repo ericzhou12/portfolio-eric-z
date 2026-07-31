@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowUpRight, X } from "lucide-react";
-import type { GraphEntry } from "@/lib/graph";
+import type { GraphEntry } from "@/features/experience/graph";
 
 /**
  * Docked detail for a selected graph node. Mirrors the card markup in

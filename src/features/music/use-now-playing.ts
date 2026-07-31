@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { NowPlaying } from "@/lib/now-playing";
+import type { NowPlaying } from "@/features/music/now-playing";
 
 const POLL_MS = 30_000;
 

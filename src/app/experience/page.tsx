@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { Experience } from "@/components/experience";
-import { ExperienceView } from "@/components/experience-view";
-import { Projects } from "@/components/projects";
+import { Experience } from "@/features/experience/experience";
+import { ExperienceView } from "@/features/experience/experience-view";
+import { Projects } from "@/features/experience/projects";
 
 export const metadata: Metadata = {
   title: "Experience",
