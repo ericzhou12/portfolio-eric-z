@@ -47,7 +47,8 @@ export type Job = {
   points: string[];
   metrics?: { value: string; label: string }[];
   stack: string[];
-  links?: { label: string; href: string }[];
+  /** primary marks the headline artifact (paper, live site) for extra emphasis. */
+  links?: { label: string; href: string; primary?: boolean }[];
 };
 
 export const experience: Job[] = [
@@ -64,7 +65,7 @@ export const experience: Job[] = [
     location: "Troy, MI · On-site",
     kind: "Internship",
     summary:
-      "Built an end-to-end internal police report writing platform on AWS, from the SPA at the edge down to the authorization firewall and the infrastructure that provisions it.",
+      "Built an internal police report writing platform end to end on AWS — SPA at the edge, serverless APIs, and CDK-provisioned multi-tenant infrastructure.",
     points: [
       "Built the comprehensive, end-to-end internal police report writing support platform — an SPA served from S3 behind CloudFront, calling REST APIs backed by stateless, serverless Lambda endpoints.",
       "Formed a secure entry gateway with Cognito OIDC, parsing and validating user JWT claims server-side to act as a strict authorization firewall enforcing granular RBAC across multi-tenant report infrastructures.",
@@ -103,7 +104,7 @@ export const experience: Job[] = [
     location: "Stony Brook, NY",
     kind: "Research · PI: Dr. Mohammad Javad Amiri",
     summary:
-      "Applied reinforcement learning to parameter-space optimization of DAG-based Byzantine fault-tolerant consensus, cutting end-to-end latency of the Autobahn protocol by half.",
+      "Tuned DAG-based Byzantine fault-tolerant consensus with reinforcement learning, halving end-to-end latency of the Autobahn protocol. Submitted to VLDB 2026.",
     points: [
       "Selected as 1 of 53 fellows from 1,380 applicants (~3.8%) to the Simons Summer Research Program.",
       "Leveraged reinforcement learning for parameter-space optimization and communication in DAG-based Byzantine fault-tolerant consensus protocols, reducing end-to-end latency of the Autobahn protocol by 49.8% vs. default and 73.3% vs. random parameter configuration across 6 scenarios with varied adversarial and normal behavior.",
@@ -125,7 +126,11 @@ export const experience: Job[] = [
       "Distributed Systems",
     ],
     links: [
-      { label: "arXiv:2606.09120", href: "https://arxiv.org/abs/2606.09120" },
+      {
+        label: "arXiv:2606.09120",
+        href: "https://arxiv.org/abs/2606.09120",
+        primary: true,
+      },
     ],
   },
   {
@@ -142,7 +147,7 @@ export const experience: Job[] = [
     location: "Remote",
     kind: "Program",
     summary:
-      "One of 150 participants nationwide, instructed by Institutional Securities Group analysts.",
+      "One of 150 participants nationwide, taught by Institutional Securities Group analysts.",
     points: [
       "Selected as 1 of 150 participants nationwide and instructed by Institutional Securities Group analysts.",
       "Applied analytical and problem-solving skills through assignments, case studies, and team-based finance projects.",
@@ -163,7 +168,7 @@ export const experience: Job[] = [
     location: "Troy, MI · Hybrid",
     kind: "Research · PI: Dr. Shiyong Lu",
     summary:
-      "Smart contract auditing on the Sepolia testnet, plus ideation and writing for an AI health agent.",
+      "Audited 10,000+ lines of Solidity on the Sepolia testnet and helped write Longevity AI, a health-focused AI agent.",
     points: [
       "Programmed and tested smart contracts in Solidity deployed to the Sepolia testnet; audited over 10,000 lines of code.",
       "Managed communication between graduate-level courses CSC 8710 and CSC 4996 under Professor Shiyong Lu.",
@@ -185,7 +190,7 @@ export const experience: Job[] = [
     location: "Troy, MI · Remote",
     kind: "Internship",
     summary:
-      "First engineering internship — feature work and quality assurance on a collaborative whiteboard product.",
+      "First engineering internship — feature work and QA on a collaborative online whiteboard product.",
     points: [
       "Contributed to feature development and quality assurance for a collaborative online whiteboard platform.",
       "Wrote and executed test plans, reporting and triaging defects alongside the engineering team.",
@@ -207,7 +212,7 @@ export type Project = {
   description: string;
   highlights: string[];
   tags: string[];
-  links: { label: string; href: string }[];
+  links: { label: string; href: string; primary?: boolean }[];
 };
 
 export const projects: Project[] = [

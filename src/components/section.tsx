@@ -1,16 +1,20 @@
 import { Reveal } from "@/components/reveal";
+import { cn } from "@/lib/utils";
 
 export function Section({
   id,
   index,
   title,
   intro,
+  tight,
   children,
 }: {
   id: string;
   index?: string;
   title: string;
   intro?: string;
+  /** Pulls stacked sections closer together — for pages that read as one list. */
+  tight?: boolean;
   children: React.ReactNode;
 }) {
   return (
@@ -18,10 +22,18 @@ export function Section({
       id={id}
       aria-labelledby={`${id}-title`}
       // The leading section on a page carries no divider — only stacked ones do.
-      className="border-t border-line py-20 first:border-t-0 first:pt-12 sm:py-28 sm:first:pt-16"
+      className={cn(
+        "border-t border-line first:border-t-0 first:pt-12 sm:first:pt-16",
+        tight ? "py-12 sm:py-16" : "py-20 sm:py-28",
+      )}
     >
       <Reveal>
-        <header className="mb-12 flex flex-col gap-3 sm:mb-16">
+        <header
+          className={cn(
+            "flex flex-col gap-3",
+            tight ? "mb-8 sm:mb-10" : "mb-12 sm:mb-16",
+          )}
+        >
           <span className="label-caps">
             {index ? `${index} / ${title}` : title}
           </span>

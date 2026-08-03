@@ -2,6 +2,7 @@
 
 import { ArrowUpRight, X } from "lucide-react";
 import type { GraphEntry } from "@/features/experience/graph";
+import { cn } from "@/lib/utils";
 
 /**
  * Docked detail for a selected graph node. Mirrors the card markup in
@@ -114,8 +115,17 @@ export function ExperienceDetailPanel({
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 font-mono text-xs text-accent underline-offset-4 hover:underline"
+                className={cn(
+                  "inline-flex items-center gap-1 font-mono text-xs text-accent underline-offset-4 hover:underline",
+                  link.primary &&
+                    "rounded-md bg-accent-soft px-2.5 py-1 ring-1 ring-accent/25 hover:no-underline hover:ring-accent/50",
+                )}
               >
+                {link.primary ? (
+                  <span className="mr-0.5 text-[0.625rem] uppercase tracking-[0.14em] text-faint">
+                    Paper
+                  </span>
+                ) : null}
                 {link.label}
                 <ArrowUpRight className="size-3" aria-hidden />
               </a>
