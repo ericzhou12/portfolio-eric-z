@@ -26,6 +26,9 @@ const tint = (entryId: string) => {
   return { "--c": color?.light, "--c-dk": color?.dark } as React.CSSProperties;
 };
 
+/** Persists the intro dismissal so it only ever shows on a first visit. */
+const INTRO_KEY = "experience-graph-intro";
+
 const KEYS = [
   { keys: ["←", "→"], label: "change year" },
   { keys: ["↑", "↓"], label: "change node" },
@@ -111,13 +114,26 @@ export function ExperienceGraph() {
   const [focus, setFocus] = useState(DEFAULT_FOCUS);
   const [hoveredKey, setHoveredKey] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
-  // Once the intro is gone it never returns; closing a detail leaves bare net.
-  const [introDone, setIntroDone] = useState(false);
+  // null until localStorage is read, so returning visitors never see a flash of
+  // the intro. Once seen it never returns; closing a detail leaves bare net.
+  const [introDone, setIntroDone] = useState<boolean | null>(null);
 
-  const toggleSelected = useCallback((entryId: string) => {
-    setIntroDone(true);
-    setSelected((current) => (current === entryId ? null : entryId));
+  useEffect(() => {
+    setIntroDone(window.localStorage.getItem(INTRO_KEY) === "seen");
   }, []);
+
+  const dismissIntro = useCallback(() => {
+    setIntroDone(true);
+    window.localStorage.setItem(INTRO_KEY, "seen");
+  }, []);
+
+  const toggleSelected = useCallback(
+    (entryId: string) => {
+      dismissIntro();
+      setSelected((current) => (current === entryId ? null : entryId));
+    },
+    [dismissIntro],
+  );
 
   const active = (hoveredKey ? nodeByKey.get(hoveredKey)?.entryId : null) ?? selected;
   const selectedEntry = selected ? entryById.get(selected) : undefined;
@@ -529,10 +545,10 @@ export function ExperienceGraph() {
                 onClose={() => setSelected(null)}
               />
             </div>
-          ) : !introDone ? (
+          ) : introDone === false ? (
             // Sized to its content rather than filling the column.
             <div className="absolute left-[calc(50%+3.5rem)] top-1/2 z-30 -translate-y-1/2">
-              <GraphIntro onDismiss={() => setIntroDone(true)} />
+              <GraphIntro onDismiss={dismissIntro} />
             </div>
           ) : null}
         </div>
