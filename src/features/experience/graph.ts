@@ -102,7 +102,6 @@ const rank = (t: TimePoint) => t.year * 12 + t.month;
 const bucket = (year: number) => Math.max(year, BUCKET_FLOOR);
 
 /** Display-only truncation so labels fit under a 40px node. */
-const shortOrg = (org: string) => org.replace(/ (University|Technologies)$/, "");
 const shortTitle = (title: string) =>
   title.replace(/^(The|Modified) /, "").replace(/ (Project|Model)$/, "");
 
@@ -114,7 +113,8 @@ export const entries: GraphEntry[] = [
   ...experience.map<GraphEntry>((job) => ({
     id: job.id,
     band: "work",
-    label: shortOrg(job.org),
+    // The logo already carries the org, so the caption names the role.
+    label: job.shortRole ?? job.role,
     initials: initialsOf(job.org),
     logo: job.logo,
     logoFill: job.logoFill,

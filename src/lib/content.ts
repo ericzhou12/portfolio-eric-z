@@ -31,6 +31,8 @@ export type TimePoint = { year: number; month: number };
 export type Job = {
   id: string;
   role: string;
+  /** Graph-node caption; the full role rarely fits under a 48px node. */
+  shortRole?: string;
   org: string;
   orgUrl?: string;
   period: string;
@@ -55,6 +57,7 @@ export const experience: Job[] = [
   {
     id: "tyler",
     role: "Software Development Engineer Intern",
+    shortRole: "SDE Intern",
     org: "Tyler Technologies",
     orgUrl: "https://www.tylertech.com",
     logo: "/logos/tylertech.png",
@@ -93,6 +96,7 @@ export const experience: Job[] = [
   {
     id: "simons",
     role: "Simons Research Fellow in Computer Science",
+    shortRole: "Research Fellow",
     org: "Stony Brook University",
     orgUrl: "https://www.stonybrook.edu",
     logo: "/logos/stonybrook.jpg",
@@ -136,6 +140,7 @@ export const experience: Job[] = [
   {
     id: "morgan-stanley",
     role: "Finance Academy Participant",
+    shortRole: "Finance Academy",
     org: "Morgan Stanley",
     orgUrl: "https://www.morganstanley.com",
     logo: "/logos/morganstanley.png",
@@ -158,6 +163,7 @@ export const experience: Job[] = [
   {
     id: "wayne",
     role: "Blockchain Research Assistant",
+    shortRole: "Research Asst.",
     org: "Wayne State University",
     orgUrl: "https://wayne.edu",
     logo: "/logos/waynestate.svg",
@@ -180,6 +186,7 @@ export const experience: Job[] = [
   {
     id: "boardx",
     role: "Software Engineer & QA Intern",
+    shortRole: "SWE / QA Intern",
     org: "BoardX",
     logo: "/logos/boardx.jpg",
     logoFill: true,

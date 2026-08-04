@@ -523,7 +523,7 @@ export function ExperienceGraph() {
                       <span
                         aria-hidden
                         className={cn(
-                          "absolute left-1/2 top-full mt-1 w-24 -translate-x-1/2 truncate text-center font-mono text-[0.625rem] transition-colors",
+                          "absolute left-1/2 top-full mt-1 w-28 -translate-x-1/2 truncate text-center font-mono text-[0.625rem] transition-colors",
                           isActive ? "text-fg" : "text-muted",
                         )}
                       >
