@@ -383,5 +383,5 @@ export const certifications= [
 export const navigation = [
   { href: "/", label: "Home" },
   { href: "/experience", label: "Experience" },
-  { href: "/honors", label: "Honors" },
+  { href: "/background", label: "Background" },
 ];

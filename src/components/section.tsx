@@ -39,7 +39,7 @@ export function Section({
           </span>
           <h2
             id={`${id}-title`}
-            className="text-3xl font-semibold tracking-tight sm:text-4xl"
+            className="heading-display text-4xl sm:text-5xl"
           >
             {title}
           </h2>

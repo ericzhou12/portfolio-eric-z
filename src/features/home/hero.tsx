@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Download, Github, Linkedin } from "lucide-react";
+import { ArrowRight, FileText, Github, Linkedin, Mail } from "lucide-react";
 import { CopyEmail } from "@/features/home/copy-email";
 import { ExperiencePreview } from "@/features/experience/experience-preview";
 import { Reveal } from "@/components/reveal";
@@ -16,11 +16,11 @@ export function Hero() {
         <Reveal>
           <StatusLine />
 
-          <h1 className="mt-5 text-5xl font-semibold leading-[1.05] tracking-tight sm:text-6xl">
+          <h1 className="heading-display mt-5 text-6xl leading-[0.95] sm:text-7xl">
             {profile.name}
           </h1>
 
-          <p className="mt-3 text-xl text-muted sm:text-2xl">
+          <p className="mt-4 text-lg text-muted sm:text-xl">
             {profile.headline}
           </p>
 
@@ -30,33 +30,44 @@ export function Hero() {
             </p>
           ) : null}
 
-          <div className="mt-7 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             <a
               href={profile.resume}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-fg px-4 py-2.5 text-sm font-medium text-bg transition-opacity hover:opacity-85"
+              aria-label="Download résumé (PDF)"
+              title="Résumé"
+              className="inline-flex h-11 items-center justify-center rounded-full px-5 border border-line text-fg transition-colors hover:border-accent/40 hover:bg-accent/5"
             >
-              <Download className="size-4" aria-hidden />
-              résumé
+              <FileText className="size-[18px]" aria-hidden />
             </a>
             <a
               href={profile.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-line px-4 py-2.5 text-sm font-medium text-fg transition-colors hover:border-accent/40 hover:bg-accent/5"
+              aria-label="GitHub"
+              title="GitHub"
+              className="inline-flex h-11 items-center justify-center rounded-full px-5 border border-line text-fg transition-colors hover:border-accent/40 hover:bg-accent/5"
             >
-              <Github className="size-4" aria-hidden />
-              github
+              <Github className="size-[18px]" aria-hidden />
             </a>
             <a
               href={profile.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-line px-4 py-2.5 text-sm font-medium text-fg transition-colors hover:border-accent/40 hover:bg-accent/5"
+              aria-label="LinkedIn"
+              title="LinkedIn"
+              className="inline-flex h-11 items-center justify-center rounded-full px-5 border border-line text-fg transition-colors hover:border-accent/40 hover:bg-accent/5"
             >
-              <Linkedin className="size-4" aria-hidden />
-              linkedin
+              <Linkedin className="size-[18px]" aria-hidden />
+            </a>
+            <a
+              href={`mailto:${profile.email}`}
+              aria-label={`Email ${profile.email}`}
+              title="Email"
+              className="inline-flex h-11 items-center justify-center rounded-full px-5 border border-line text-fg transition-colors hover:border-accent/40 hover:bg-accent/5"
+            >
+              <Mail className="size-[18px]" aria-hidden />
             </a>
           </div>
 

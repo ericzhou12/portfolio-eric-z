@@ -7,9 +7,12 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  // /work was the old route; keep any existing links and indexed URLs alive.
+  // Old routes; keep any existing links and indexed URLs alive.
   async redirects() {
-    return [{ source: "/work", destination: "/experience", permanent: true }];
+    return [
+      { source: "/work", destination: "/experience", permanent: true },
+      { source: "/honors", destination: "/background", permanent: true },
+    ];
   },
 };
 

@@ -89,13 +89,13 @@ function GraphIntro({ onDismiss }: { onDismiss: () => void }) {
               {row.keys.map((key) => (
                 <kbd
                   key={key}
-                  className="inline-flex h-14 min-w-14 items-center justify-center rounded-lg border border-line px-4 font-mono text-2xl text-fg"
+                  className="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-line px-2.5 font-mono text-sm text-fg"
                 >
                   {key}
                 </kbd>
               ))}
             </dt>
-            <dd className="text-xl text-muted">{row.label}</dd>
+            <dd className="text-sm text-muted">{row.label}</dd>
           </div>
         ))}
       </dl>
@@ -332,7 +332,7 @@ export function ExperienceGraph() {
                       pathLength={1}
                       strokeDasharray={1}
                       strokeDashoffset={entered ? 0 : 1}
-                      opacity={active ? (touches ? 0.7 : 0.06) : 0.22}
+                      opacity={active ? (touches ? 0.7 : 0.06) : 0.16}
                       style={{
                         transition:
                           "stroke-dashoffset 0.9s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease-out",
@@ -407,19 +407,6 @@ export function ExperienceGraph() {
                 </button>
               ))}
 
-              {layers.map((layer) =>
-                layer.divider === null ? null : (
-                  // bg-bg knocks the rule out behind the label.
-                  <span
-                    key={`divider-${layer.key}`}
-                    className="label-caps absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap bg-bg px-2.5"
-                    style={{ left: `${layer.x}%`, top: `${BAND_BOUNDARY}%` }}
-                  >
-                    projects
-                  </span>
-                ),
-              )}
-
               {nodes.map((node) => {
                 const entry = entryById.get(node.entryId);
                 if (!entry) return null;
@@ -464,15 +451,6 @@ export function ExperienceGraph() {
                       {entry.title} · {entry.subtitle} · {entry.period} ·{" "}
                       {isStart ? "start" : "end"}
                     </span>
-
-                    {node.month ? (
-                      <span
-                        aria-hidden
-                        className="absolute bottom-full left-1/2 mb-0.5 -translate-x-1/2 whitespace-nowrap font-mono text-[0.625rem] text-faint"
-                      >
-                        {node.month}
-                      </span>
-                    ) : null}
 
                     {isLive ? (
                       <span
@@ -519,15 +497,25 @@ export function ExperienceGraph() {
                       )}
                     </span>
 
-                    {isStart ? (
+                    {isStart || isActive ? (
+                      // bg knocks the mesh and band rule out from behind the text.
                       <span
                         aria-hidden
-                        className={cn(
-                          "absolute left-1/2 top-full mt-1 w-28 -translate-x-1/2 truncate text-center font-mono text-[0.625rem] transition-colors",
-                          isActive ? "text-fg" : "text-muted",
-                        )}
+                        className="absolute left-1/2 top-full mt-1 flex w-36 -translate-x-1/2 flex-col items-center gap-0.5 font-mono text-[0.625rem] leading-4"
                       >
-                        {entry.label}
+                        <span
+                          className={cn(
+                            "max-w-full truncate rounded bg-bg/85 px-1.5 transition-colors",
+                            isActive ? "text-fg" : "text-muted",
+                          )}
+                        >
+                          {entry.label}
+                        </span>
+                        {isActive ? (
+                          <span className="whitespace-nowrap rounded bg-bg/85 px-1.5 text-faint">
+                            {entry.period}
+                          </span>
+                        ) : null}
                       </span>
                     ) : null}
                   </button>
@@ -535,6 +523,23 @@ export function ExperienceGraph() {
               })}
             </div>
           </div>
+
+          {/* Band names sit at the left edge, each anchored to the boundary
+              rule and pushed off it by its own height so they can't collide. */}
+          <span
+            aria-hidden
+            className="label-caps pointer-events-none absolute left-0 -translate-y-[calc(100%+10px)]"
+            style={{ top: `${BAND_BOUNDARY}%` }}
+          >
+            work
+          </span>
+          <span
+            aria-hidden
+            className="label-caps pointer-events-none absolute left-0 translate-y-[10px]"
+            style={{ top: `${BAND_BOUNDARY}%` }}
+          >
+            projects
+          </span>
 
           {/* Right column, starting just clear of the focused layer. Absent
               entirely once the intro is dismissed and nothing is selected. */}

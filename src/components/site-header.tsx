@@ -29,10 +29,10 @@ export function SiteHeader() {
       <div className={cn(shell, "flex h-16 items-center justify-between gap-4")}>
         <Link
           href="/"
-          className="font-mono text-sm font-medium tracking-tight text-fg"
+          className="heading-display text-lg italic tracking-tight text-fg"
         >
           eric zhou
-          <span className="text-accent">.</span>
+          <span className="not-italic text-accent">.</span>
         </Link>
 
         {/* Right padding clears the theme toggle pinned to the viewport corner. */}

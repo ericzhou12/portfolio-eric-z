@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Instrument_Serif, JetBrains_Mono, Schibsted_Grotesk } from "next/font/google";
 import "./globals.css";
-import { CommandPalette } from "@/components/command-palette";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { SocialRail } from "@/components/social-rail";
@@ -10,9 +9,17 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { profile } from "@/lib/content";
 import { cn, shell } from "@/lib/utils";
 
-const inter = Inter({
+const sans = Schibsted_Grotesk({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-sans-src",
+  display: "swap",
+});
+
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-display-src",
   display: "swap",
 });
 
@@ -94,7 +101,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${mono.variable} font-sans bg-bg text-fg`}
+        className={`${sans.variable} ${serif.variable} ${mono.variable} font-sans bg-bg text-fg`}
       >
         <ThemeProvider
           attribute="class"
@@ -112,7 +119,6 @@ export default function RootLayout({
           {/* Column layout lets a page claim exactly one viewport height. */}
           <div className="flex min-h-dvh flex-col">
             <SiteHeader />
-            <CommandPalette />
             <ThemeToggle />
             <SocialRail />
 

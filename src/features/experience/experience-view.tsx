@@ -77,7 +77,7 @@ export function ExperienceView({ children }: { children: React.ReactNode }) {
               <span className="label-caps">01 / Experience</span>
               <h2
                 id="experience-graph-title"
-                className="mt-1.5 text-3xl font-semibold tracking-tight"
+                className="heading-display mt-1.5 text-3xl sm:text-4xl"
               >
                 <span className="text-fg">neural net</span>
                 <span className="text-accent">work experience</span>

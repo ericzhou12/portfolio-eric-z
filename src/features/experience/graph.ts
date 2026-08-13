@@ -28,8 +28,8 @@ const BUCKET_FLOOR = 2024;
 export const LAYER_GAP = 24;
 
 export const BANDS = {
-  work: { min: 11, max: 43, gap: 16 },
-  project: { min: 57, max: 89, gap: 16 },
+  work: { min: 12, max: 40, gap: 14 },
+  project: { min: 58, max: 86, gap: 14 },
 } as const;
 
 /** Where the two bands meet — one constant so the rule and its label agree. */

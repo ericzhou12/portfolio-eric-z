@@ -21,24 +21,21 @@ export function NowPlayingLine() {
   if (!track.playing && !track.playedAt) return null;
 
   return (
-    <>
-      <span aria-hidden>·</span>
-      <a
-        href={profile.lastfm}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 transition-colors hover:text-fg"
-      >
-        {track.playing ? <Equalizer /> : <span aria-hidden>♪</span>}
-        <span>{track.playing ? "currently playing:" : "last played:"}</span>
-        {track.art ? <TrackCover src={track.art} /> : null}
-        <span className="max-w-[14rem] truncate">
-          {track.artist} — {track.title}
-        </span>
-        {!track.playing && track.playedAt ? (
-          <span className="opacity-70">{agoLabel(track.playedAt)}</span>
-        ) : null}
-      </a>
-    </>
+    <a
+      href={profile.lastfm}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="inline-flex items-center gap-1.5 transition-colors hover:text-fg"
+    >
+      {track.playing ? <Equalizer /> : <span aria-hidden>♪</span>}
+      <span>{track.playing ? "currently playing:" : "last played:"}</span>
+      {track.art ? <TrackCover src={track.art} /> : null}
+      <span className="max-w-[14rem] truncate">
+        {track.artist} — {track.title}
+      </span>
+      {!track.playing && track.playedAt ? (
+        <span className="opacity-70">{agoLabel(track.playedAt)}</span>
+      ) : null}
+    </a>
   );
 }

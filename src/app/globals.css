@@ -3,7 +3,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-sans-src), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-src), Georgia, "Times New Roman", serif;
   --font-mono: var(--font-mono-src), ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --color-bg: var(--bg);
@@ -88,6 +89,13 @@
   color: var(--faint);
 }
 
+/* Display headings: a single-weight serif, so scale and tracking do the work. */
+@utility heading-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
 /* Per-entry graph tint. Both hexes ride inline as custom properties so the
    node colour swaps with the theme without reading it in JS. */
 .node-tint {
@@ -112,7 +120,7 @@
 /* Purple glow behind the status line while a track is playing. Blobs drift and
    morph on independent timings so the field never visibly loops. */
 .blob-field {
-  --glow-opacity: 0.65;
+  --glow-opacity: 0.45;
   opacity: 0;
   scale: 0.7;
   animation:
@@ -121,14 +129,14 @@
 }
 
 .dark .blob-field {
-  --glow-opacity: 0.34;
+  --glow-opacity: 0.26;
 }
 
 .blob {
   position: absolute;
   translate: -50% -50%;
   border-radius: var(--shape1);
-  filter: blur(34px);
+  filter: blur(48px) saturate(0.9);
   animation:
     blob-drift var(--drift-duration) ease-in-out infinite alternate,
     blob-morph var(--morph-duration) ease-in-out infinite alternate;
